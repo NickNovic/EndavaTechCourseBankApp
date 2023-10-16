@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "D:\\EndavaCourses\\Code\\Client\\obj\\Debug\\net7.0\\build-gz\\yUgCQ0E6.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "D:\\EndavaCourses\\Code\\Client\\obj\\Debug\\net7.0\\scopedcss\\bundle\\EndavaTechCourseBankApp.Client.styles.css",
+      "PackagePath": "staticwebassets\\EndavaTechCourseBankApp.Client.styles.css"
+    },
+    {
+      "Id": "D:\\EndavaCourses\\Code\\Client\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "D:\\EndavaCourses\\Code\\Client\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.EndavaTechCourseBankApp.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.EndavaTechCourseBankApp.Client.props",
+      "PackagePath": "build\\EndavaTechCourseBankApp.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.EndavaTechCourseBankApp.Client.props",
+      "PackagePath": "buildMultiTargeting\\EndavaTechCourseBankApp.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.EndavaTechCourseBankApp.Client.props",
+      "PackagePath": "buildTransitive\\EndavaTechCourseBankApp.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
