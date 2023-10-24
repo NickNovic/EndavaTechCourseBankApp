@@ -1,0 +1,14 @@
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\bin\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.deps.json
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\bin\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.runtimeconfig.json
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\bin\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\bin\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.pdb
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.csproj.AssemblyReference.cache
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.AssemblyInfoInputs.cache
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.AssemblyInfo.cs
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.csproj.CoreCompileInputs.cache
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\refint\EndavaTechCourseBankApp.Infrastructure.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.pdb
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\EndavaTechCourseBankApp.Infrastructure.genruntimeconfig.cache
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Infrastructure\obj\Debug\net7.0\ref\EndavaTechCourseBankApp.Infrastructure.dll

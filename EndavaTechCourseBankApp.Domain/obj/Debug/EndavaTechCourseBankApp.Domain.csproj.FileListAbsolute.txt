@@ -1,0 +1,10 @@
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\bin\Debug\EndavaTechCourseBankApp.Domain.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\bin\Debug\EndavaTechCourseBankApp.Domain.pdb
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\bin\Debug\Microsoft.Analytics.Interfaces.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\bin\Debug\Microsoft.Analytics.Interfaces.Streaming.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\bin\Debug\Microsoft.Analytics.Types.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\obj\Debug\EndavaTechCourseBankApp.Domain.csproj.AssemblyReference.cache
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\obj\Debug\EndavaTechCourseBankApp.Domain.csproj.CoreCompileInputs.cache
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\obj\Debug\EndavaTechCourseBankApp.Domain.csproj.CopyComplete
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\obj\Debug\EndavaTechCourseBankApp.Domain.dll
+D:\EndavaCourses\Code\EndavaTechCourseBankApp.Domain\obj\Debug\EndavaTechCourseBankApp.Domain.pdb
