@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj",
+      "projectUniqueName": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj",
       "projectName": "EndavaTechCourseBankApp.Shared",
-      "projectPath": "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj",
+      "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj",
       "packagesPath": "C:\\Users\\theni\\.nuget\\packages\\",
-      "outputPath": "D:\\EndavaCourses\\Code\\Shared\\obj\\",
+      "outputPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Software\\Visual Studio\\SDK\\NuGetPackages"

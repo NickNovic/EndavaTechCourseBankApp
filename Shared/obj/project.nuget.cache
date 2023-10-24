@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QNhhVYVxjMGXERnc/G9pTTenD52cROF12cZ4hr9cBdiFVZqfno/5CX7a6MuZDw1ykc5O+nHmvb/7wjn3DL9WfA==",
+  "dgSpecHash": "iQ+vmycrr/qJnHssVGR13exbAu0K2AGART5/XjaXw+qBuVhp3HvhI2T/o0u3Gco7e0rn3YWssfed6QodKUneeg==",
   "success": true,
-  "projectFilePath": "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj",
+  "projectFilePath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
