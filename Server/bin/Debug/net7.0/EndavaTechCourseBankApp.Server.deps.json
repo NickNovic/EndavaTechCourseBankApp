@@ -783,6 +783,9 @@
         }
       },
       "EndavaTechCourseBankApp.Shared/1.0.0": {
+        "dependencies": {
+          "EndavaTechCourseBankApp.Domain": "1.0.0"
+        },
         "runtime": {
           "EndavaTechCourseBankApp.Shared.dll": {}
         }

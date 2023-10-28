@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oxs8qe6ezGLQ7Vaawn7jo00NhvKZHD+ZYN5xp9W0jWMyq56UR2obM4EVjYYN/l/J6z3ccNFvaU13KXA+6qN/6A==",
+  "dgSpecHash": "zt4YLvxe3MEUQAQsWg+VOtr6vHsiKsAW4rCle0qQrwNZvzMqhaPxuUdJDD+04ExzNKeABmM0g5Q5ifE6ASnGiA==",
   "success": true,
-  "projectFilePath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Client\\EndavaTechCourseBankApp.Client.csproj",
+  "projectFilePath": "D:\\EndavaCourses\\Code\\Client\\EndavaTechCourseBankApp.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theni\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.12\\microsoft.aspnetcore.authorization.7.0.12.nupkg.sha512",
     "C:\\Users\\theni\\.nuget\\packages\\microsoft.aspnetcore.components\\7.0.12\\microsoft.aspnetcore.components.7.0.12.nupkg.sha512",

@@ -25,12 +25,8 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             {
                 Type = createWalletDTO.Type,
                 Amount = createWalletDTO.Amount,
-                Currency = new Currency
-                {
-                    Name = "EURO",
-                    CurrencyCode = "EUR",
-                    ChangeRate = 20
-                }
+                Currency = createWalletDTO.Currency
+                
             };
             _context.wallets.Add(wallet);
             _context.SaveChanges();

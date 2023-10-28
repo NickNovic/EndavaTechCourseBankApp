@@ -1,0 +1,54 @@
+﻿@page "/wallets"
+@using EndavaTechCourseBankApp.Shared;
+@using System.Net.Http.Json;
+@inject HttpClient httpClient
+@inject NavigationManager navManager;
+<h3>Wallets</h3>
+<br />
+<br />
+
+<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+
+
+@if(wallets == null || !wallets.Any())
+{
+    <h5>No wallets to be displayed yet...</h5>
+}
+else
+{
+    <MudTable Items="@wallets">
+        <HeaderContent>
+            <MudTh>Id</MudTh>
+            <MudTh>Create Date</MudTh>
+            <MudTh>Type</MudTh>
+            <MudTh>Amount</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.Id</MudTd>
+            <MudTd>@context.CreateDate</MudTd>
+            <MudTd>@context.Type</MudTd>
+            <MudTd>@context.Amount</MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private List<GetWalletDTO> wallets;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetWallets();
+        StateHasChanged();
+
+        await base.OnInitializedAsync();
+    }
+
+    public async Task GetWallets()
+    {
+        wallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+    }
+    public void RedirectToCreateWallet()
+    {
+        navManager.NavigateTo("/create-wallet");
+    }
+}

@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace EndavaTechCourseBankApp.Infrastructure;

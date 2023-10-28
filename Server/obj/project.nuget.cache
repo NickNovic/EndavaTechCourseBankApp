@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FoA2xmrEqAQKE/pOybO9AyNcEFRJYnKD5idUn/Gp9segc5r6JU3VPOGf+jQQcq66iOJ1ZqKAS5N71uoCswnZNg==",
+  "dgSpecHash": "K9wLzMBmkhXOQbe1/0GCJA6AUC80mHCOJHVb0DZ8eNiGtPYC20arsu6l5vU42lukMcfDhie2C1PqA1t/KH05sg==",
   "success": true,
-  "projectFilePath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Server\\EndavaTechCourseBankApp.Server.csproj",
+  "projectFilePath": "D:\\EndavaCourses\\Code\\Server\\EndavaTechCourseBankApp.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theni\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\theni\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

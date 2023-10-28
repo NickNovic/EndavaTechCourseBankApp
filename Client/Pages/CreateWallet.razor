@@ -1,0 +1,54 @@
+﻿@page "/create-wallet"
+@using EndavaTechCourseBankApp.Domain.Models;
+@using EndavaTechCourseBankApp.Shared;
+@inject HttpClient httpClient
+@inject NavigationManager navManager
+
+
+<h3>Create Wallet</h3>
+<br />
+<br />
+<MudText>New Wallet: </MudText>
+<MudTextField T="string" @bind-Value="wallet.Type" Label="Type" />
+<MudTextField T="decimal" @bind-Value="wallet.Amount" Label="Amount" />
+
+<MudTextField T="string" @bind-Value="currency.CurrencyCode" Label="Currency Code" />
+<MudTextField T="decimal" @bind-Value="currency.ChangeRate" Label="Currency Code" />
+<MudTextField T="string" @bind-Value="currency.Name" Label="Currency Code" />
+
+
+<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="AddWallet">Add</MudButton>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <MudAlert>@errorMessage</MudAlert>
+}
+
+@code {
+    private CreateWalletDTO wallet = new();
+    private Currency currency = new Currency();
+    private string errorMessage;
+
+    public async Task AddWallet()
+    {
+        wallet.Currency = currency;
+        if (string.IsNullOrEmpty(wallet.Type))
+            errorMessage = "Wallet Type has to be populated.";
+        else if (wallet.Amount <= 0)
+            errorMessage = "Wallet Amount has to be populated with a value greater than zero.";
+        else if (string.IsNullOrEmpty(wallet.Currency.CurrencyCode) &&
+        string.IsNullOrEmpty(wallet.Currency.Name) && wallet.Currency.ChangeRate > 0)
+           errorMessage = "Invalid Currency";
+        else
+        {
+            var result = await this.httpClient.PostAsJsonAsync("api/wallet", wallet);
+
+            if (!result.IsSuccessStatusCode)
+            {
+                errorMessage = "An error occured on server side. Please contact the administrator.";
+            }
+        }
+
+        navManager.NavigateTo("/wallets");
+    }
+}

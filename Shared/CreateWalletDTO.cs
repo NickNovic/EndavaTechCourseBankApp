@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EndavaTechCourseBankApp.Domain.Models;
 
 namespace EndavaTechCourseBankApp.Shared
 {
@@ -10,5 +6,6 @@ namespace EndavaTechCourseBankApp.Shared
     {
         public string Type { get; set; }
         public decimal Amount { get; set; }
+        public Currency Currency { get; set; }
     }
 }

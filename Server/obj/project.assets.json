@@ -1472,6 +1472,9 @@
       "EndavaTechCourseBankApp.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "EndavaTechCourseBankApp.Domain": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/EndavaTechCourseBankApp.Shared.dll": {}
         },
@@ -3789,11 +3792,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Server\\EndavaTechCourseBankApp.Server.csproj",
+      "projectUniqueName": "D:\\EndavaCourses\\Code\\Server\\EndavaTechCourseBankApp.Server.csproj",
       "projectName": "EndavaTechCourseBankApp.Server",
-      "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Server\\EndavaTechCourseBankApp.Server.csproj",
+      "projectPath": "D:\\EndavaCourses\\Code\\Server\\EndavaTechCourseBankApp.Server.csproj",
       "packagesPath": "C:\\Users\\theni\\.nuget\\packages\\",
-      "outputPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Server\\obj\\",
+      "outputPath": "D:\\EndavaCourses\\Code\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Software\\Visual Studio\\SDK\\NuGetPackages"
@@ -3815,14 +3818,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Client\\EndavaTechCourseBankApp.Client.csproj": {
-              "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Client\\EndavaTechCourseBankApp.Client.csproj"
+            "D:\\EndavaCourses\\Code\\Client\\EndavaTechCourseBankApp.Client.csproj": {
+              "projectPath": "D:\\EndavaCourses\\Code\\Client\\EndavaTechCourseBankApp.Client.csproj"
             },
-            "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj": {
-              "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj"
+            "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj": {
+              "projectPath": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj"
             },
-            "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj": {
-              "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj"
+            "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj": {
+              "projectPath": "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj"
             }
           }
         }
