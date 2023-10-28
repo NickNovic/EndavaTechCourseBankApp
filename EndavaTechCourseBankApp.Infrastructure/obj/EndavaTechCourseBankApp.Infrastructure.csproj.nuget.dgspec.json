@@ -1,17 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj": {}
+    "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj": {
+    "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj",
+        "projectName": "EndavaTechCourseBankApp.Domain",
+        "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj",
         "projectName": "EndavaTechCourseBankApp.Infrastructure",
-        "projectPath": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj",
+        "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\EndavaTechCourseBankApp.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\theni\\.nuget\\packages\\",
-        "outputPath": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Infrastructure\\obj\\",
+        "outputPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Software\\Visual Studio\\SDK\\NuGetPackages"
@@ -32,7 +47,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj": {
+                "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -49,13 +68,17 @@
               "target": "Package",
               "version": "[7.0.12, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.12, )"
             }

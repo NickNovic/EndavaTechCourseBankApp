@@ -7,13 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Wallet.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.12" PrivateAssets="all" />
     <PackageReference Include="MudBlazor" Version="6.11.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EndavaTechCourseBankApp.Domain\EndavaTechCourseBankApp.Domain.csproj" />
     <ProjectReference Include="..\Shared\EndavaTechCourseBankApp.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Wallet.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Wallet.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Wallet.razor" />
   </ItemGroup>
 
 </Project>

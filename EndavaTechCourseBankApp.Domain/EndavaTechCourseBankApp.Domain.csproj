@@ -44,7 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BaseEntity.cs" />
+    <Compile Include="Models\CashByCode.cs" />
     <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

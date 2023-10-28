@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v7.0": {
       "EndavaTechCourseBankApp.Infrastructure/1.0.0": {
         "dependencies": {
+          "EndavaTechCourseBankApp.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.12",
+          "Microsoft.EntityFrameworkCore.Design": "7.0.12",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.12"
         },
@@ -609,6 +611,11 @@
             "fileVersion": "6.0.21.52210"
           }
         }
+      },
+      "EndavaTechCourseBankApp.Domain/1.0.0": {
+        "runtime": {
+          "EndavaTechCourseBankApp.Domain.dll": {}
+        }
       }
     }
   },
@@ -1037,6 +1044,11 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "EndavaTechCourseBankApp.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

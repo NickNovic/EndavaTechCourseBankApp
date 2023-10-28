@@ -532,6 +532,15 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+      "EndavaTechCourseBankApp.Domain/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        }
+      },
       "EndavaTechCourseBankApp.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -1066,6 +1075,15 @@
         },
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
+        }
+      },
+      "EndavaTechCourseBankApp.Domain/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
         }
       },
       "EndavaTechCourseBankApp.Shared/1.0.0": {
@@ -1986,6 +2004,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "EndavaTechCourseBankApp.Domain/1.0.0": {
+      "type": "project",
+      "path": "../EndavaTechCourseBankApp.Domain/EndavaTechCourseBankApp.Domain.csproj",
+      "msbuildProject": "../EndavaTechCourseBankApp.Domain/EndavaTechCourseBankApp.Domain.csproj"
+    },
     "EndavaTechCourseBankApp.Shared/1.0.0": {
       "type": "project",
       "path": "../Shared/EndavaTechCourseBankApp.Shared.csproj",
@@ -1994,6 +2017,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "EndavaTechCourseBankApp.Domain >= 1.0.0",
       "EndavaTechCourseBankApp.Shared >= 1.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly >= 7.0.12",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 7.0.12",
@@ -2033,6 +2057,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj": {
+              "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj"
+            },
             "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj": {
               "projectPath": "D:\\Endava\\Code\\EndavaTechCourseBankApp\\Shared\\EndavaTechCourseBankApp.Shared.csproj"
             }

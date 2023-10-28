@@ -9,3 +9,14 @@ D:\EndavaCourses\Code\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.dll
 D:\EndavaCourses\Code\Shared\obj\Debug\net7.0\refint\EndavaTechCourseBankApp.Shared.dll
 D:\EndavaCourses\Code\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.pdb
 D:\EndavaCourses\Code\Shared\obj\Debug\net7.0\ref\EndavaTechCourseBankApp.Shared.dll
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\bin\Debug\net7.0\EndavaTechCourseBankApp.Shared.deps.json
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\bin\Debug\net7.0\EndavaTechCourseBankApp.Shared.dll
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\bin\Debug\net7.0\EndavaTechCourseBankApp.Shared.pdb
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.AssemblyInfoInputs.cache
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.AssemblyInfo.cs
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.csproj.CoreCompileInputs.cache
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.dll
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\refint\EndavaTechCourseBankApp.Shared.dll
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\EndavaTechCourseBankApp.Shared.pdb
+D:\Endava\Code\EndavaTechCourseBankApp\Shared\obj\Debug\net7.0\ref\EndavaTechCourseBankApp.Shared.dll

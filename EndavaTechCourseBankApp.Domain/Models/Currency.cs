@@ -10,8 +10,7 @@ namespace EndavaTechCourseBankApp.Domain.Models
     public class Currency : BaseEntity
     {
         public string CurrencyCode { get; set; }
-        public decimal PriceSell { get; set; }
-        public decimal PriceBuy {  get; set; } 
+        public decimal ChangeRate { get; set; }
         public string Name { get; set; }
     }
 }
