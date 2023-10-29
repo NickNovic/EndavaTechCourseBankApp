@@ -37,14 +37,18 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Route("getwallets")]
         public async Task<List<Wallet>> GetWallets()
         {
-            return await _context.wallets.ToListAsync();
+            List<Wallet> walletsRes = new List<Wallet>();
+            List<Wallet> wallets = await _context.wallets.Include(c => c.Currency).ToListAsync();
+            return wallets;
         }
 
         [HttpGet("{id}")]
         [Route("getWalletById")]
         public async Task<Wallet> GetWalletById(Guid id)
         {
-            return await _context.wallets.FindAsync(id);
+            Wallet w = _context.wallets.Include(c => c.Currency).FirstOrDefault(t => t.Id == id);
+            Guid Cid = w.CurrencyId;
+            return w;
         }
 
         [HttpGet]

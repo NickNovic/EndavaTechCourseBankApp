@@ -8,7 +8,7 @@
 <br />
 <br />
 
-<--!MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</-->
+<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
 
 
 @if(wallets == null || !wallets.Any())
@@ -22,46 +22,42 @@ else
             <MudTh>Id</MudTh>
             <MudTh>Create Date</MudTh>
             <MudTh>Type</MudTh>
-            <MudTh>Amount</MudTh>
+                <MudTh>Amount</MudTh>
+                <MudTh>Pincode</MudTh>
             <MudTh>Currency Code</MudTh>
             <MudTh>Change Rate</MudTh>
             <MudTh>Name</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd>@context.Id</MudTd>
-            <MudTd>@context.CreateDate</MudTd>
+            <MudTd>@context.TimeStamp</MudTd>
             <MudTd>@context.Type</MudTd>
             <MudTd>@context.Amount</MudTd>
-            <MudTd>@context</MudTd>
-            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="(e => GetWallet(context.Id))">Get All Info</MudButton>
+            <MudTd>@context.Pincode</MudTd>
+            <MudTd>@context.Currency.CurrencyCode</MudTd>
+                <MudTd>@context.Currency.ChangeRate</MudTd>
+                <MudTd>@context.Currency.Name</MudTd>
         </RowTemplate>
     </MudTable>
 }
 
 @code {
-    private List<GetWalletDTO> wallets;
+    private List<Wallet> wallets;
     private List<Currency> currencies;
 
     protected override async Task OnInitializedAsync()
     {
-        await GetWallets();
+        await GetWalletsWithCurrencies();
         StateHasChanged();
 
         await base.OnInitializedAsync();
     }
 
-    public async Task GetWallet(Guid Id)
+    public async Task GetWalletsWithCurrencies()
     {
-        navManager.NavigateTo("/wallet-info/" + Id.ToString());
+        wallets = await this.httpClient.GetFromJsonAsync<List<Wallet>>("api/wallet/getwallets");        
     }
-    public async Task GetWallets()
-    {
-        wallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
-        foreach(GetWalletDTO w in wallets)
-        {
-            w.Curre
-        }
-    }
+
     public void RedirectToCreateWallet()
     {
         navManager.NavigateTo("/create-wallet");
