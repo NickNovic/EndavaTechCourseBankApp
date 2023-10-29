@@ -41,9 +41,17 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpGet("{id}")]
+        [Route("getWalletById")]
         public async Task<Wallet> GetWalletById(Guid id)
         {
             return await _context.wallets.FindAsync(id);
+        }
+
+        [HttpGet]
+        [Route("getCurrencyById")]
+        public async Task<Currency> GetCurrencyById(Guid id)
+        {
+            return await _context.currencies.FindAsync(id);
         }
     }
 

@@ -1,8 +1,38 @@
 ﻿@page "/wallet-info"
 @using EndavaTechCourseBankApp.Domain.Models;
+@using EndavaTechCourseBankApp.Shared;
+@using System.Net.Http.Json;
+@using EndavaTechCourseBankApp.Domain.Models;
+@inject HttpClient httpClient
+@inject NavigationManager navManager;
+
 
 <h3>WalletInfo</h3>
 
+<MudTextField T="string" @bind-Value="stringId" Label="Wallet ID" />
+<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="(e => GetWallet(stringId))">Send</MudButton>
+
+<MudText>Id: @wallet.Id</MudText>
+<MudText>Amount: @wallet.Amount</MudText>
+<MudText>Change Rate: @wallet.ChangeRate</MudText>
+<MudText>Last activity: @wallet.LastActivity</MudText>
+<MudText>Type: @wallet.Type</MudText>
+<MudText>Pincode: @wallet.Pincode</MudText>
+
 @code {
-    private Wallet wallet;
+    public string stringId;
+    private Guid Id;
+    public Wallet wallet;
+    public Currency currency;
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    public async Task GetWallet(string Id)
+    {
+        Guid id = Guid.Parse(stringId);
+        wallet = await this.httpClient.GetFromJsonAsync<Wallet>("api/wallet/" + Id.ToString());
+        currency = wallet.Currency;
+    }
 }

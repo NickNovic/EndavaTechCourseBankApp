@@ -1,4 +1,5 @@
 ﻿@page "/wallets"
+@using EndavaTechCourseBankApp.Domain.Models;
 @using EndavaTechCourseBankApp.Shared;
 @using System.Net.Http.Json;
 @inject HttpClient httpClient
@@ -7,7 +8,7 @@
 <br />
 <br />
 
-<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+<--!MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</-->
 
 
 @if(wallets == null || !wallets.Any())
@@ -22,18 +23,24 @@ else
             <MudTh>Create Date</MudTh>
             <MudTh>Type</MudTh>
             <MudTh>Amount</MudTh>
+            <MudTh>Currency Code</MudTh>
+            <MudTh>Change Rate</MudTh>
+            <MudTh>Name</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd>@context.Id</MudTd>
             <MudTd>@context.CreateDate</MudTd>
             <MudTd>@context.Type</MudTd>
             <MudTd>@context.Amount</MudTd>
+            <MudTd>@context</MudTd>
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="(e => GetWallet(context.Id))">Get All Info</MudButton>
         </RowTemplate>
     </MudTable>
 }
 
 @code {
     private List<GetWalletDTO> wallets;
+    private List<Currency> currencies;
 
     protected override async Task OnInitializedAsync()
     {
@@ -43,9 +50,17 @@ else
         await base.OnInitializedAsync();
     }
 
+    public async Task GetWallet(Guid Id)
+    {
+        navManager.NavigateTo("/wallet-info/" + Id.ToString());
+    }
     public async Task GetWallets()
     {
         wallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+        foreach(GetWalletDTO w in wallets)
+        {
+            w.Curre
+        }
     }
     public void RedirectToCreateWallet()
     {

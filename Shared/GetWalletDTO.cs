@@ -9,4 +9,5 @@ public class GetWalletDTO
     public string Type { get; set; }
 
     public decimal Amount { get; set; }
+    public Guid CurrencyId { get; set; }        
 }

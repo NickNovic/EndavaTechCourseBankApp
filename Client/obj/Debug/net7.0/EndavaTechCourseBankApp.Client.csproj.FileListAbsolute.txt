@@ -853,6 +853,12 @@ D:\Endava\Code\EndavaTechCourseBankApp\Client\bin\Debug\net7.0\EndavaTechCourseB
 D:\Endava\Code\EndavaTechCourseBankApp\Client\bin\Debug\net7.0\EndavaTechCourseBankApp.Domain.pdb
 D:\Endava\Code\EndavaTechCourseBankApp\Client\obj\Debug\net7.0\build-gz\ELhEwgf+.gz
 D:\Endava\Code\EndavaTechCourseBankApp\Client\obj\Debug\net7.0\build-gz\pJHgEDbQ.gz
+D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.csproj.AssemblyReference.cache
+D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.AssemblyInfoInputs.cache
+D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.AssemblyInfo.cs
+D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.csproj.CoreCompileInputs.cache
+D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.MvcApplicationPartsAssemblyInfo.cache
 D:\EndavaCourses\Code\Client\bin\Debug\net7.0\wwwroot\_framework\blazor.boot.json
 D:\EndavaCourses\Code\Client\bin\Debug\net7.0\wwwroot\_framework\blazor.webassembly.js
 D:\EndavaCourses\Code\Client\bin\Debug\net7.0\wwwroot\_framework\dotnet.7.0.12.heyp4kgr3t.js
@@ -1478,12 +1484,6 @@ D:\EndavaCourses\Code\Client\bin\Debug\net7.0\EndavaTechCourseBankApp.Domain.dll
 D:\EndavaCourses\Code\Client\bin\Debug\net7.0\EndavaTechCourseBankApp.Shared.dll
 D:\EndavaCourses\Code\Client\bin\Debug\net7.0\EndavaTechCourseBankApp.Domain.pdb
 D:\EndavaCourses\Code\Client\bin\Debug\net7.0\EndavaTechCourseBankApp.Shared.pdb
-D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.csproj.AssemblyReference.cache
-D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.GeneratedMSBuildEditorConfig.editorconfig
-D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.AssemblyInfoInputs.cache
-D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.AssemblyInfo.cs
-D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.csproj.CoreCompileInputs.cache
-D:\EndavaCourses\Code\Client\obj\Debug\net7.0\EndavaTechCourseBankApp.Client.MvcApplicationPartsAssemblyInfo.cache
 D:\EndavaCourses\Code\Client\obj\Debug\net7.0\build-gz\c1x+cbNR.gz
 D:\EndavaCourses\Code\Client\obj\Debug\net7.0\build-gz\GBG8cdnM.gz
 D:\EndavaCourses\Code\Client\obj\Debug\net7.0\build-gz\vAtrhos7.gz
