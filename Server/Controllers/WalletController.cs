@@ -15,6 +15,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
         public WalletController(ApplicationDbContext dbContext)
         {
+            ArgumentNullException.ThrowIfNull(dbContext);
             _context = dbContext;
         }
 
@@ -35,21 +36,41 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
         [HttpGet]
         [Route("getwallets")]
-        public async Task<List<Wallet>> GetWallets()
+        public async Task<List<GetWalletDTO>> GetWallets()
         {
-            List<Wallet> walletsRes = new List<Wallet>();
+            List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
             List<Wallet> wallets = await _context.wallets.Include(c => c.Currency).ToListAsync();
-            return wallets;
+            foreach(Wallet w in wallets)
+            {
+                walletsRes.Add(new GetWalletDTO
+                {
+                    WalletId = w.Id,
+                    Amount = w.Amount,
+                    Currency = w.Currency,
+                    Pincode = w.Pincode,
+                    LastActivity = w.LastActivity,
+                    Type = w.Type
+                });
+            }
+
+            return walletsRes;
         }
 
         [HttpGet("{id}")]
         [Route("getWalletById")]
-        public async Task<Wallet> GetWalletById(Guid id)
+        public async Task<GetWalletDTO> GetWalletById(Guid id)
         {
             Wallet w = await _context.wallets.FindAsync(id);
             Guid Cid = w.CurrencyId;
             w.Currency = await GetCurrencyById(Cid);
-            return w;
+            return new GetWalletDTO {
+                WalletId = w.Id,
+                Amount = w.Amount,
+                Currency = w.Currency,
+                Pincode = w.Pincode,
+                LastActivity = w.LastActivity,
+                Type = w.Type
+            };
         }
 
         [HttpGet]
