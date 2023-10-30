@@ -8,13 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MudBlazor" Version="6.11.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Client\EndavaTechCourseBankApp.Client.csproj" />
     <ProjectReference Include="..\Shared\EndavaTechCourseBankApp.Shared.csproj" />
+    <ProjectReference Include="..\EndavaTechCourseBankApp.Infrastructure\EndavaTechCourseBankApp.Infrastructure.csproj" />
   </ItemGroup>
-
 
 </Project>

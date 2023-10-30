@@ -1,0 +1,65 @@
+﻿@page "/wallets"
+@using EndavaTechCourseBankApp.Domain.Models;
+@using EndavaTechCourseBankApp.Shared;
+@using System.Net.Http.Json;
+@inject HttpClient httpClient
+@inject NavigationManager navManager;
+<h3>Wallets</h3>
+<br />
+<br />
+
+<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+
+
+@if(wallets == null || !wallets.Any())
+{
+    <h5>No wallets to be displayed yet...</h5>
+}
+else
+{
+    <MudTable Items="@wallets">
+        <HeaderContent>
+            <MudTh>Id</MudTh>
+            <MudTh>Create Date</MudTh>
+            <MudTh>Type</MudTh>
+                <MudTh>Amount</MudTh>
+                <MudTh>Pincode</MudTh>
+            <MudTh>Currency Code</MudTh>
+            <MudTh>Change Rate</MudTh>
+            <MudTh>Name</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.Id</MudTd>
+            <MudTd>@context.TimeStamp</MudTd>
+            <MudTd>@context.Type</MudTd>
+            <MudTd>@context.Amount</MudTd>
+            <MudTd>@context.Pincode</MudTd>
+            <MudTd>@context.Currency.CurrencyCode</MudTd>
+                <MudTd>@context.Currency.ChangeRate</MudTd>
+                <MudTd>@context.Currency.Name</MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private List<Wallet> wallets;
+    private List<Currency> currencies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetWalletsWithCurrencies();
+        StateHasChanged();
+
+        await base.OnInitializedAsync();
+    }
+
+    public async Task GetWalletsWithCurrencies()
+    {
+        wallets = await this.httpClient.GetFromJsonAsync<List<Wallet>>("api/wallet/getwallets");        
+    }
+
+    public void RedirectToCreateWallet()
+    {
+        navManager.NavigateTo("/create-wallet");
+    }
+}

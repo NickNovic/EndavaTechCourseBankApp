@@ -532,9 +532,21 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+      "EndavaTechCourseBankApp.Domain/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        }
+      },
       "EndavaTechCourseBankApp.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "EndavaTechCourseBankApp.Domain": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/EndavaTechCourseBankApp.Shared.dll": {}
         },
@@ -1068,9 +1080,21 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+      "EndavaTechCourseBankApp.Domain/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EndavaTechCourseBankApp.Domain.dll": {}
+        }
+      },
       "EndavaTechCourseBankApp.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "EndavaTechCourseBankApp.Domain": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/EndavaTechCourseBankApp.Shared.dll": {}
         },
@@ -1986,6 +2010,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "EndavaTechCourseBankApp.Domain/1.0.0": {
+      "type": "project",
+      "path": "../EndavaTechCourseBankApp.Domain/EndavaTechCourseBankApp.Domain.csproj",
+      "msbuildProject": "../EndavaTechCourseBankApp.Domain/EndavaTechCourseBankApp.Domain.csproj"
+    },
     "EndavaTechCourseBankApp.Shared/1.0.0": {
       "type": "project",
       "path": "../Shared/EndavaTechCourseBankApp.Shared.csproj",
@@ -1994,6 +2023,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "EndavaTechCourseBankApp.Domain >= 1.0.0",
       "EndavaTechCourseBankApp.Shared >= 1.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly >= 7.0.12",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 7.0.12",
@@ -2033,6 +2063,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj": {
+              "projectPath": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Domain\\EndavaTechCourseBankApp.Domain.csproj"
+            },
             "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj": {
               "projectPath": "D:\\EndavaCourses\\Code\\Shared\\EndavaTechCourseBankApp.Shared.csproj"
             }

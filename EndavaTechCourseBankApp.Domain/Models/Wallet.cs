@@ -14,6 +14,7 @@ namespace EndavaTechCourseBankApp.Domain.Models
         public int Pincode { get; set; }
         public string Type { get; set; }
         public DateTime LastActivity { get; set; }
-        public decimal ChangeRate { get; set; }
+        public Guid CurrencyId { get; set; }
+        //public decimal ChangeRate { get; set; }
     }
 }

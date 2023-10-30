@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KDQlC/rGP8Ow32DY6ud1zy/5UWPSge/QsZ+HvUFs6JI=",
+  "Hash": "M8YMQT+X+Xps/co15SNV+CEUI/OLdR340U4gLfDgHFU=",
   "Source": "EndavaTechCourseBankApp.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -168,6 +168,40 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net7.0\\EndavaTechCourseBankApp.Client.pdb"
+    },
+    {
+      "Identity": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Domain.dll",
+      "SourceId": "EndavaTechCourseBankApp.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/EndavaTechCourseBankApp.Domain.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Domain\\bin\\Debug\\EndavaTechCourseBankApp.Domain.dll"
+    },
+    {
+      "Identity": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Domain.pdb",
+      "SourceId": "EndavaTechCourseBankApp.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/EndavaTechCourseBankApp.Domain.pdb",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "symbol",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\EndavaCourses\\Code\\EndavaTechCourseBankApp.Domain\\bin\\Debug\\EndavaTechCourseBankApp.Domain.pdb"
     },
     {
       "Identity": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Shared.dll",
@@ -4590,6 +4624,23 @@
       "OriginalItemSpec": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Configuration.dll"
     },
     {
+      "Identity": "D:\\EndavaCourses\\Code\\Client\\obj\\Debug\\net7.0\\build-gz\\gGYFIaWc.gz",
+      "SourceId": "EndavaTechCourseBankApp.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/EndavaTechCourseBankApp.Domain.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Domain.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Domain.dll"
+    },
+    {
       "Identity": "D:\\EndavaCourses\\Code\\Client\\obj\\Debug\\net7.0\\build-gz\\gI+3+PTv.gz",
       "SourceId": "EndavaTechCourseBankApp.Client",
       "SourceType": "Computed",
@@ -6543,6 +6594,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\dotnet.wasm"
+    },
+    {
+      "Identity": "D:\\EndavaCourses\\Code\\Client\\obj\\Debug\\net7.0\\build-gz\\V5dzbsEb.gz",
+      "SourceId": "EndavaTechCourseBankApp.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/EndavaTechCourseBankApp.Domain.pdb.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Domain.pdb",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\EndavaCourses\\Code\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\EndavaTechCourseBankApp.Domain.pdb"
     },
     {
       "Identity": "D:\\EndavaCourses\\Code\\Client\\obj\\Debug\\net7.0\\build-gz\\V64Rh1+L.gz",

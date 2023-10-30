@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {
       "EndavaTechCourseBankApp.Shared/1.0.0": {
+        "dependencies": {
+          "EndavaTechCourseBankApp.Domain": "1.0.0"
+        },
         "runtime": {
           "EndavaTechCourseBankApp.Shared.dll": {}
+        }
+      },
+      "EndavaTechCourseBankApp.Domain/1.0.0": {
+        "runtime": {
+          "EndavaTechCourseBankApp.Domain.dll": {}
         }
       }
     }
   },
   "libraries": {
     "EndavaTechCourseBankApp.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EndavaTechCourseBankApp.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
