@@ -46,8 +46,9 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Route("getWalletById")]
         public async Task<Wallet> GetWalletById(Guid id)
         {
-            Wallet w = _context.wallets.Include(c => c.Currency).FirstOrDefault(t => t.Id == id);
+            Wallet w = await _context.wallets.FindAsync(id);
             Guid Cid = w.CurrencyId;
+            w.Currency = await GetCurrencyById(Cid);
             return w;
         }
 
