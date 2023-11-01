@@ -3,7 +3,6 @@
 @inject HttpClient httpClient
 @inject NavigationManager navManager
 
-
 <h3>Create Wallet</h3>
 <br />
 <br />
@@ -24,12 +23,17 @@
 }
 
 @code {
-    private CreateWalletDTO wallet = new();
-    
+    private CreateWalletDTO wallet = new CreateWalletDTO
+    {
+        Currency = new CurrencyDTO()
+    };
+
     private string errorMessage;
 
     public async Task AddWallet()
     {
+        //wallet.Currency = new CurrencyDTO();
+
         if (string.IsNullOrEmpty(wallet.Type))
             errorMessage = "Wallet Type has to be populated.";
         else if (wallet.Amount <= 0)
