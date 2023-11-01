@@ -1,0 +1,11 @@
+global using NUnit.Framework;
+global using AutoFixture;
+global using AutoFixture.AutoNSubstitute;
+global using AutoFixture.NUnit3;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using EntityFrameworkCore.AutoFixture.Sqlite;
+global using EntityFrameworkCore.AutoFixture.Core;

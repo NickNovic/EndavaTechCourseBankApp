@@ -1,8 +1,4 @@
 ﻿@page "/wallet-info"
-@using EndavaTechCourseBankApp.Domain.Models;
-@using EndavaTechCourseBankApp.Shared;
-@using System.Net.Http.Json;
-@using EndavaTechCourseBankApp.Domain.Models;
 @inject HttpClient httpClient
 @inject NavigationManager navManager;
 
@@ -29,8 +25,8 @@
 @code {
     public string stringId;
     private Guid Id;
-    public Wallet wallet;
-    public Currency currency;
+    public GetWalletDTO wallet;
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -39,6 +35,6 @@
     public async Task GetWallet(string Id)
     {
         Guid id = Guid.Parse(stringId);
-        wallet = await this.httpClient.GetFromJsonAsync<Wallet>("api/wallet/" + id.ToString());
+        wallet = await this.httpClient.GetFromJsonAsync<GetWalletDTO>("api/wallet/" + id.ToString());
     }
 }

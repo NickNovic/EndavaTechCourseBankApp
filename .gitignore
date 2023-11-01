@@ -1,1 +1,8 @@
 /.vs/*
+EndavaTechCourseBankApp.Test/obj/*
+Client/obj/*
+Client/bin/*
+*.dll
+*.pdb
+Client\bin\Debug\net7.0\
+*.cache

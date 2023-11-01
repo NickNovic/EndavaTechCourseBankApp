@@ -1,7 +1,4 @@
 ﻿@page "/wallets"
-@using EndavaTechCourseBankApp.Domain.Models;
-@using EndavaTechCourseBankApp.Shared;
-@using System.Net.Http.Json;
 @inject HttpClient httpClient
 @inject NavigationManager navManager;
 <h3>Wallets</h3>
@@ -42,8 +39,7 @@ else
 }
 
 @code {
-    private List<Wallet> wallets;
-    private List<Currency> currencies;
+    private List<GetWalletDTO> wallets;
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,7 +51,7 @@ else
 
     public async Task GetWalletsWithCurrencies()
     {
-        wallets = await this.httpClient.GetFromJsonAsync<List<Wallet>>("api/wallet/getwallets");        
+        wallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");        
     }
 
     public void RedirectToCreateWallet()

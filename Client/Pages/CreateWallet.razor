@@ -1,9 +1,6 @@
 ﻿@page "/create-wallet"
-@using EndavaTechCourseBankApp.Domain.Models;
-@using EndavaTechCourseBankApp.Shared;
 @inject HttpClient httpClient
 @inject NavigationManager navManager
-
 
 <h3>Create Wallet</h3>
 <br />
@@ -12,9 +9,9 @@
 <MudTextField T="string" @bind-Value="wallet.Type" Label="Type" />
 <MudTextField T="decimal" @bind-Value="wallet.Amount" Label="Amount" />
 
-<MudTextField T="string" @bind-Value="currency.CurrencyCode" Label="Currency Code" />
-<MudTextField T="decimal" @bind-Value="currency.ChangeRate" Label="Change Rate" />
-<MudTextField T="string" @bind-Value="currency.Name" Label="Name" />
+<MudTextField T="string" @bind-Value="wallet.Currency.CurrencyCode" Label="Currency Code" />
+<MudTextField T="decimal" @bind-Value="wallet.Currency.ChangeRate" Label="Change Rate" />
+<MudTextField T="string" @bind-Value="wallet.Currency.Name" Label="Name" />
 
 
 <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="AddWallet">Add</MudButton>
@@ -25,13 +22,17 @@
 }
 
 @code {
-    private CreateWalletDTO wallet = new();
-    private Currency currency = new Currency();
+    private CreateWalletDTO wallet = new CreateWalletDTO
+    {
+        Currency = new CurrencyDTO()
+    };
+
     private string errorMessage;
 
     public async Task AddWallet()
     {
-        wallet.Currency = currency;
+        //wallet.Currency = new CurrencyDTO();
+
         if (string.IsNullOrEmpty(wallet.Type))
             errorMessage = "Wallet Type has to be populated.";
         else if (wallet.Amount <= 0)
