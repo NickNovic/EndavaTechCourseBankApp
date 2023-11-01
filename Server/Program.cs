@@ -1,3 +1,5 @@
+using EndavaTechCourseBankApp.Application.Commands.AddCurrency;
+using EndavaTechCourseBankApp.Application.Queries.GetWallets;
 using EndavaTechCourseBankApp.Infrastructure;
 
 namespace EndavaTechCourseBankApp
@@ -13,7 +15,17 @@ namespace EndavaTechCourseBankApp
             builder.Services.AddInfrastructure(configuration);
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-            
+
+            builder.Services.AddMediatR(config =>
+            {
+                config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+                config.RegisterServicesFromAssemblies(typeof(GetWalletsQuery).Assembly);
+                config.RegisterServicesFromAssemblies(typeof(AddCurrencyCommand).Assembly);
+
+
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

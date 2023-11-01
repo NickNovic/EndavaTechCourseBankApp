@@ -1,6 +1,8 @@
-﻿using EndavaTechCourseBankApp.Domain.Models;
+﻿using EndavaTechCourseBankApp.Application.Queries.GetWallets;
+using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Shared;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +14,14 @@ namespace EndavaTechCourseBankApp.Server.Controllers
     public class WalletController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly IMediator mediator;
         public WalletController(ApplicationDbContext dbContext)
         {
             ArgumentNullException.ThrowIfNull(dbContext);
+            ArgumentNullException.ThrowIfNull(mediator);
+            
             _context = dbContext;
+            this.mediator = mediator;
         }
 
         [HttpPost]
@@ -42,9 +47,11 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Route("getwallets")]
         public async Task<List<GetWalletDTO>> GetWallets()
         {
-            List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
-            List<Wallet> wallets = await _context.wallets.Include(c => c.Currency).ToListAsync();
-            foreach(Wallet w in wallets)
+           List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
+            var query = new GetWalletsQuery();
+            var wallets = await mediator.Send(query);
+
+            foreach (Wallet w in wallets)
             {
                 walletsRes.Add(new GetWalletDTO
                 {
@@ -56,7 +63,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                     Type = w.Type
                 });
             }
-
             return walletsRes;
         }
 

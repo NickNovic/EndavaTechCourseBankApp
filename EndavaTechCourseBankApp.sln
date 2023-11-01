@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndavaTechCourseBankApp.Inf
 		{22136482-5045-4A1F-BD1F-7D541019665D} = {22136482-5045-4A1F-BD1F-7D541019665D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndavaTechCourseBankApp.Test", "EndavaTechCourseBankApp.Test\EndavaTechCourseBankApp.Test.csproj", "{9832D6E9-86A9-4B7E-BC61-4AC6093A6A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndavaTechCourseBankApp.Test", "EndavaTechCourseBankApp.Test\EndavaTechCourseBankApp.Test.csproj", "{9832D6E9-86A9-4B7E-BC61-4AC6093A6A96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndavaTechCourseBankApp.Application", "EndavaTechCourseBankApp.Application\EndavaTechCourseBankApp.Application.csproj", "{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{9832D6E9-86A9-4B7E-BC61-4AC6093A6A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9832D6E9-86A9-4B7E-BC61-4AC6093A6A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9832D6E9-86A9-4B7E-BC61-4AC6093A6A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
