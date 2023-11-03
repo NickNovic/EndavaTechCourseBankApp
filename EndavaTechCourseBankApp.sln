@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndavaTechCourseBankApp.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndavaTechCourseBankApp.Test", "EndavaTechCourseBankApp.Test\EndavaTechCourseBankApp.Test.csproj", "{9832D6E9-86A9-4B7E-BC61-4AC6093A6A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndavaTechCourseBankApp.Application", "EndavaTechCourseBankApp.Application\EndavaTechCourseBankApp.Application.csproj", "{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndavaTechCourseBankApp.Application", "EndavaTechCourseBankApp.Application\EndavaTechCourseBankApp.Application.csproj", "{30FB0A0B-5946-4A6F-8888-97E9FFA7853A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,7 @@
-﻿using EndavaTechCourseBankApp.Application.Queries.GetWallets;
+﻿using EndavaTechCourseBankApp.Application.Commands.CreateWallet;
+using EndavaTechCourseBankApp.Application.Queries.GetWallets;
+using EndavaTechCourseBankApp.Application.Queries.GetWalletsById;
+using EndavaTechCourseBankApp.Application.Queries.GetCurrencyById;
 using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Shared;
@@ -14,33 +17,28 @@ namespace EndavaTechCourseBankApp.Server.Controllers
     public class WalletController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly IMediator mediator;
-        public WalletController(ApplicationDbContext dbContext)
+        private readonly IMediator _mediator;
+        public WalletController(ApplicationDbContext dbContext, IMediator mediator)
         {
             ArgumentNullException.ThrowIfNull(dbContext);
             ArgumentNullException.ThrowIfNull(mediator);
             
             _context = dbContext;
-            this.mediator = mediator;
+            this._mediator = mediator;
         }
 
         [HttpPost]
-        public IActionResult CreateWallet([FromBody] CreateWalletDTO createWalletDTO)
+        public async Task CreateWallet([FromBody] CreateWalletDTO createWalletDTO)
         {
-            var wallet = new Wallet
+            var query = new CreateWalletCommand
             {
                 Type = createWalletDTO.Type,
                 Amount = createWalletDTO.Amount,
-                Currency = new Currency {
-                    ChangeRate = createWalletDTO.Currency.ChangeRate,
-                    CurrencyCode = createWalletDTO.Currency.CurrencyCode,
-                    Name = createWalletDTO.Currency.Name
-                }
-                
+                CurrencyCode = createWalletDTO.CurrencyCode
             };
-            _context.wallets.Add(wallet);
-            _context.SaveChanges();
-            return Ok();
+
+            await _mediator.Send(query);
+            
         }
 
         [HttpGet]
@@ -49,7 +47,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         {
            List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
             var query = new GetWalletsQuery();
-            var wallets = await mediator.Send(query);
+            var wallets = await _mediator.Send(query);
 
             foreach (Wallet w in wallets)
             {
@@ -70,9 +68,12 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Route("getWalletById")]
         public async Task<GetWalletDTO> GetWalletById(Guid id)
         {
-            Wallet w = await _context.wallets.FindAsync(id);
-            Guid Cid = w.CurrencyId;
-            w.Currency = await GetCurrencyById(Cid);
+            GetWalletByIdQuery query = new GetWalletByIdQuery 
+            { 
+                Id = id 
+            };
+            var w = await _mediator.Send(query);
+
             return new GetWalletDTO {
                 WalletId = w.Id,
                 Amount = w.Amount,
@@ -81,14 +82,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 LastActivity = w.LastActivity,
                 Type = w.Type
             };
+
         }
 
-        [HttpGet]
-        [Route("getCurrencyById")]
-        public async Task<Currency> GetCurrencyById(Guid id)
-        {
-            return await _context.currencies.FindAsync(id);
-        }
+        
     }
 
 }

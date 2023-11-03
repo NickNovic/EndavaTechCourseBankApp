@@ -4,7 +4,7 @@
 
 <MudGrid>
     <MudItem md="7">
-        @if (currencies is null || !currencies.Any())
+        @if (currencies == null || !currencies.Any())
         {
             <MudAlert Class="pa-4 mt-6" Severity="Severity.Error">Nu exista valute la moment.</MudAlert>
         }
@@ -80,13 +80,14 @@
 </MudGrid>
 
 @code {
-    private IEnumerable<CurrencyDTO> currencies;
+    private List<CurrencyDTO> currencies;
     private CurrencyDTO newCurrency = new();
     private string newCurrencyError = string.Empty;
     private string deleteCurrencyError = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
+        currencies = new List<CurrencyDTO>();
         await GetCurrencies();
         StateHasChanged();
 
