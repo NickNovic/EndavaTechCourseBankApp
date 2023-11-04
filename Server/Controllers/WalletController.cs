@@ -82,10 +82,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 LastActivity = w.LastActivity,
                 Type = w.Type
             };
-
-        }
-
-        
+        }   
     }
-
 }

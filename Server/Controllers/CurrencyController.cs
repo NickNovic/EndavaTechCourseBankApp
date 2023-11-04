@@ -28,7 +28,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
             var query = new GetCurrenciesQuery();
             var result = await mediator.Send(query);
-            foreach(var c in result) {
+            foreach (var c in result) {
                 currencyesRes.Add(new CurrencyDTO
                 {
                     CurrencyCode = c.CurrencyCode,
@@ -43,7 +43,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCurrency([FromBody]CurrencyDTO currencyDTO)
+        public async Task<IActionResult> AddCurrency([FromBody] CurrencyDTO currencyDTO)
         {
             var command = new AddCurrencyCommand
             {
@@ -52,12 +52,12 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 ChangeRate = currencyDTO.ChangeRate
             };
             var result = await mediator.Send(command);
-            
+
             return result.IsSuccessful ? Ok() : BadRequest(result.Error);
         }
 
         [HttpGet]
-        [Route("getCurrencyById")]
+        [Route("{id}")]
         public async Task<Currency> GetCurrencyById(Guid id)
         {
             GetCurrencyByIdQuery request = new GetCurrencyByIdQuery

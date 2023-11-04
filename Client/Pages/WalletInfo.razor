@@ -35,6 +35,6 @@
     public async Task GetWallet(string Id)
     {
         Guid id = Guid.Parse(stringId);
-        wallet = await this.httpClient.GetFromJsonAsync<GetWalletDTO>("api/currencies/getCurrencyById/" + id.ToString());
+        wallet = await this.httpClient.GetFromJsonAsync<GetWalletDTO>("api/wallet/" + id.ToString());
     }
 }
