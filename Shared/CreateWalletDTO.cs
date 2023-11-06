@@ -6,6 +6,6 @@ namespace EndavaTechCourseBankApp.Shared
     {
         public string Type { get; set; }
         public decimal Amount { get; set; }
-        public CurrencyDTO Currency { get; set; }
+        public string CurrencyCode { get; set; }
     }
 }

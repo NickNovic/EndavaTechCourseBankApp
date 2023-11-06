@@ -1,11 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
+  <ItemGroup>
+    <Watch Include="**\*.razor" />
+  </ItemGroup>
+    
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.12" />
@@ -14,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EndavaTechCourseBankApp.Domain\EndavaTechCourseBankApp.Domain.csproj" />
     <ProjectReference Include="..\Shared\EndavaTechCourseBankApp.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Admin\Admin.razor" />
     <None Include="Pages\RowTemplate.razor" />
     <None Include="Pages\Wallets.razor" />
   </ItemGroup>
@@ -28,7 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Admin\Admin.razor" />
     <_ContentIncludedByDefault Remove="Pages\RowTemplate.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Admin\Admin.razor" />
   </ItemGroup>
 
 </Project>

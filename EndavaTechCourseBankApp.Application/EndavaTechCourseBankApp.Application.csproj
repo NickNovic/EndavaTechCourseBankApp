@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Новая папка\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EndavaTechCourseBankApp.Domain\EndavaTechCourseBankApp.Domain.csproj" />
+    <ProjectReference Include="..\EndavaTechCourseBankApp.Infrastructure\EndavaTechCourseBankApp.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
