@@ -12,5 +12,6 @@ namespace EndavaTechCourseBankApp.Domain.Models
         public string CurrencyCode { get; set; }
         public decimal ChangeRate { get; set; }
         public string Name { get; set; }
+        public List<Wallet> Wallets { get; set; } = new List<Wallet>();
     }
 }

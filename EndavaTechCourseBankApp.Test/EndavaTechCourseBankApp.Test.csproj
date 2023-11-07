@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EndavaTechCourseBankApp.Domain\EndavaTechCourseBankApp.Domain.csproj" />
     <ProjectReference Include="..\EndavaTechCourseBankApp.Infrastructure\EndavaTechCourseBankApp.Infrastructure.csproj" />
     <ProjectReference Include="..\Server\EndavaTechCourseBankApp.Server.csproj" />
   </ItemGroup>

@@ -4,6 +4,7 @@ using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Server.Controllers;
 using EndavaTechCourseBankApp.Test.Common;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 
 namespace EndavaTechCourseBankApp.Test
 {
@@ -33,5 +34,17 @@ namespace EndavaTechCourseBankApp.Test
         [Test, ApplicationData]
         public void CanCreateInstance(GuardClauseAssertion assertion)
             => assertion.Verify(typeof(WalletController).GetConstructors());
+
+        [Test, ApplicationData]
+        public async void ShouldDeleteWallet([Frozen] ApplicationDbContext context,
+            [Greedy] WalletController walletController,
+            Currency currency)
+        {
+            await walletController.DeleteWalletById(currency.Id);
+
+            var res = await context.wallets.FirstOrDefaultAsync(c => c.Id == currency.Id);
+
+            res.Should().BeNull();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EndavaTechCourseBankApp.Application.Commands.AddCurrency;
+using EndavaTechCourseBankApp.Application.Commands.DeleteCurrencyById;
 using EndavaTechCourseBankApp.Application.Queries.GetCurrencies;
 using EndavaTechCourseBankApp.Application.Queries.GetCurrencyById;
 using EndavaTechCourseBankApp.Domain.Models;
@@ -65,6 +66,14 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 Id = id
             };
             return await mediator.Send(request);
+        }
+
+        [HttpPost]
+        [Route("{id}")]
+        public async Task DeleteCurrencyById(Guid id)
+        {
+            DeleteCurrencyByIdCommand request = new DeleteCurrencyByIdCommand { Id = id };
+            await mediator.Send(request);
         }
     }
 }

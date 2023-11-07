@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -82,6 +83,13 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 LastActivity = w.LastActivity,
                 Type = w.Type
             };
-        }   
+        }
+        [HttpPost]
+        [Route("{id}")]
+        public async Task DeleteWalletById(Guid id)
+        {
+            DeleteWalletByIdCommand request = new DeleteWalletByIdCommand { Id = id };
+            await _mediator.Send(request);
+        }
     }
 }
