@@ -4,6 +4,7 @@ using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108154128_ConfigurationAdded")]
+    partial class ConfigurationAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,15 +180,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c4775ab7-78d3-4d04-992a-ebbdd1db3936"),
-                            Name = "User",
-                            NormalizedName = "USER"
+                            Id = new Guid("d53c4ca7-c6a6-41d5-91ab-1880a9f1cd67"),
+                            Name = "User"
                         },
                         new
                         {
-                            Id = new Guid("6ff2137a-fd53-429e-8daa-92fcb7a92c48"),
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Id = new Guid("87079b3c-66b4-447a-89ad-acd13434464b"),
+                            Name = "Admin"
                         });
                 });
 

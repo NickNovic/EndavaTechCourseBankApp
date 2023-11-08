@@ -38,11 +38,11 @@ namespace EndavaTechCourseBankApp.Test
         [Test, ApplicationData]
         public async void ShouldDeleteWallet([Frozen] ApplicationDbContext context,
             [Greedy] WalletController walletController,
-            Currency currency)
+            Wallet wallet)
         {
-            await walletController.DeleteWalletById(currency.Id);
+            await walletController.DeleteWalletById(wallet.Id);
 
-            var res = await context.wallets.FirstOrDefaultAsync(c => c.Id == currency.Id);
+            var res = await context.wallets.FirstOrDefaultAsync(c => c.Id == wallet.Id);
 
             res.Should().BeNull();
         }

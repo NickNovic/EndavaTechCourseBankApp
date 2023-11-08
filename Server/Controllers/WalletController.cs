@@ -86,10 +86,12 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
         [HttpPost]
         [Route("{id}")]
-        public async Task DeleteWalletById(Guid id)
+        public async Task<IActionResult> DeleteWalletById(Guid id)
         {
             DeleteWalletByIdCommand request = new DeleteWalletByIdCommand { Id = id };
             await _mediator.Send(request);
+
+            return Ok();
         }
     }
 }
