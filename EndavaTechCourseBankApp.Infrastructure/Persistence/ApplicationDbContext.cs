@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EndavaTechCourseBankApp.Domain.Models;
-
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace EndavaTechCourseBankApp.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public DbSet<Wallet> wallets { get; set; }
         public DbSet<Currency> currencies { get; set; }
@@ -24,6 +25,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Persistence
             modelBuilder.Entity<Wallet>().HasKey(w  => w.Id);
 
             modelBuilder.Entity<Currency>().HasKey(w => w.Id);
+            modelBuilder.Entity<Currency>()
+                .HasMany(e => e.Wallets)
+                .WithOne(e => e.Currency)
+                .HasForeignKey(e => e.CurrencyId)
+                .IsRequired();
+            
+            
             base.OnModelCreating(modelBuilder);
         }
 
