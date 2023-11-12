@@ -11,7 +11,7 @@ namespace EndavaTechCourseBankApp.Test
     public class WalletControllerTests
     {
         [Test, ApplicationData]
-        public async Task ShouldGetWallets(
+        public async void ShouldGetWallets(
             [Frozen] ApplicationDbContext context,
             [Greedy] WalletController walletController,
             Wallet firtWallet,
@@ -27,7 +27,8 @@ namespace EndavaTechCourseBankApp.Test
             var result = await walletController.GetWallets();
 
             //Assert
-            result.Count.Should().Be( 2 );
+            //result.Count.Should().Be( 2 );
+            Assert.AreEqual( 2, result.Count);
         }
 
 
