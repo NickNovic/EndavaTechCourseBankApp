@@ -22,7 +22,13 @@ namespace EndavaTechCourseBankApp.Application.Commands.DeleteCurrencyById
         public async Task<CommandStatus> Handle(DeleteCurrencyByIdCommand request, CancellationToken cancellationToken)
         {
             var currency = context.currencies.FirstOrDefault(t => t.Id == request.Id);
+            if(currency == null) 
+            {
+                return new CommandStatus() { IsSuccessful =  false, Error = "There is no currency with this Id" };
+            }
+
             context.currencies.Remove(currency);
+            context.SaveChanges();
 
             return new CommandStatus { IsSuccessful = true };
         }

@@ -7,7 +7,9 @@ public class GetWalletDTO : BaseEntity
 {
     public Guid WalletId {  get; set; }
     public decimal Amount { get; set; }
-    public Currency Currency { get; set; }
+    public string CurrencyCode { get; set; }
+    public decimal ChangeRate { get; set; }
+    public string CurrencyName { get; set; }
     public int Pincode { get; set; }
     public string Type { get; set; }
     public DateTime LastActivity { get; set; }

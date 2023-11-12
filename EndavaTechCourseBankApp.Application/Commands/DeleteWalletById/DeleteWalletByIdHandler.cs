@@ -20,8 +20,13 @@ namespace EndavaTechCourseBankApp.Application.Commands.DeleteWalletById
         public async Task<CommandStatus> Handle(DeleteWalletByIdCommand request, CancellationToken cancellationToken)
         {
             var wallet = context.wallets.FirstOrDefault(t => t.Id == request.Id);
-            context.wallets.Remove(wallet);
+            if(wallet == null) 
+            {
+                return new CommandStatus() { IsSuccessful = false, Error = "There is no wallet with this Id" };
+            }
 
+            context.wallets.Remove(wallet);
+            context.SaveChanges();
             return new CommandStatus { IsSuccessful = true };
         }
     }

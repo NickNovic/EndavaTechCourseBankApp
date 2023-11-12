@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
+using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -56,7 +57,9 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 {
                     WalletId = w.Id,
                     Amount = w.Amount,
-                    Currency = w.Currency,
+                    CurrencyCode = w.Currency.CurrencyCode,
+                    ChangeRate = w.Currency.ChangeRate,
+                    CurrencyName = w.Currency.Name,
                     Pincode = w.Pincode,
                     LastActivity = w.LastActivity,
                     Type = w.Type
@@ -78,7 +81,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             return new GetWalletDTO {
                 WalletId = w.Id,
                 Amount = w.Amount,
-                Currency = w.Currency,
+                //Currency = w.Currency,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
                 Type = w.Type
@@ -92,6 +95,31 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             await _mediator.Send(request);
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("update")]
+        public async Task<IActionResult> UpdateWalletById([FromBody]UpdateWalletDTO walletDTO)
+        {
+            var currequest = new GetCurrencyByIdQuery()
+            {
+                Id = walletDTO.CurrencyId
+            };
+            var resCur = await _mediator.Send(currequest);
+
+            var request = new UpdateWalletCommand() 
+            {
+                Amount = walletDTO.Amount,
+                Currency = resCur,
+                Pincode = walletDTO.Pincode,
+                LastActivity = DateTime.Now,
+                Type = walletDTO.Type,
+                CurrencyId = walletDTO.CurrencyId,
+                WalletId = walletDTO.WalletId
+            };
+
+            var res = await _mediator.Send(request);
+            return res.IsSuccessful ? Ok() : BadRequest();
         }
     }
 }

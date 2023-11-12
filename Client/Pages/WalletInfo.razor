@@ -9,7 +9,7 @@
 <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="(e => GetWallet(stringId))">Send</MudButton>
 
 
-@if(wallet == null || wallet.Currency == null)
+@if(wallet == null)
 {
     <p>Nothing to be displayed yet...</p>
 }else
