@@ -22,7 +22,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.UpdateWallet
             Wallet wallet = await context.wallets.FindAsync(request.WalletId);
             if(wallet == null) 
             {
-                return new CommandStatus() { IsSuccessful  = false, Error = "There is no wallet with this Id" };
+                return new CommandStatus() { IsSuccessful  = false, Error = "There is no wallet with this " };
             }
 
             wallet.Amount = request.Amount;
