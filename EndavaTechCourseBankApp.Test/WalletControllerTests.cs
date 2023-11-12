@@ -1,4 +1,9 @@
 ﻿using AutoFixture.Idioms;
+using EndavaTechCourseBankApp.Application.Commands.CreateWallet;
+using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
+using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
+using EndavaTechCourseBankApp.Application.Queries.GetWallets;
+using EndavaTechCourseBankApp.Application.Queries.GetWalletsById;
 using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Server.Controllers;
@@ -47,5 +52,25 @@ namespace EndavaTechCourseBankApp.Test
 
             res.Should().BeNull();
         }
+
+        [Test, ApplicationData]
+        public async Task CanCreateCreateWalletCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(CreateWalletCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateDeleteWalletByIdCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(DeleteWalletByIdCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateUpdateWalletCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(UpdateWalletCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateGetWalletsQuery(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(GetWalletsQuery).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateGetWalletByIdQuery(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(GetWalletByIdQuery).GetConstructors());
     }
 }

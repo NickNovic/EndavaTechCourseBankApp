@@ -1,4 +1,14 @@
-﻿using EndavaTechCourseBankApp.Application.Commands.DeleteCurrencyById;
+﻿using AutoFixture.Idioms;
+using EndavaTechCourseBankApp.Application.Commands.AddCurrency;
+using EndavaTechCourseBankApp.Application.Commands.CreateWallet;
+using EndavaTechCourseBankApp.Application.Commands.DeleteCurrencyById;
+using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
+using EndavaTechCourseBankApp.Application.Commands.UpdateCurrency;
+using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
+using EndavaTechCourseBankApp.Application.Queries.GetCurrencies;
+using EndavaTechCourseBankApp.Application.Queries.GetCurrencyById;
+using EndavaTechCourseBankApp.Application.Queries.GetWallets;
+using EndavaTechCourseBankApp.Application.Queries.GetWalletsById;
 using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Server.Controllers;
@@ -85,5 +95,25 @@ namespace EndavaTechCourseBankApp.Test
 
             Assert.IsNotNull(c);
         }
+
+        [Test, ApplicationData]
+        public async Task CanCreateAddCurrencyCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(AddCurrencyCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateDeleteCurrencyByIdCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(DeleteCurrencyByIdCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateUpdateCurrencyCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(UpdateCurrencyCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateGetCurrenciesQuery(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(GetCurrenciesQuery).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateGetCurrencyByIdQuery(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(GetCurrencyByIdQuery).GetConstructors());
     }
 }
