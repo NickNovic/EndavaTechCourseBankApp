@@ -1,8 +1,12 @@
 using EndavaTechCourseBankApp.Application.Commands.AddCurrency;
+using EndavaTechCourseBankApp.Application.Commands.CreateWallet;
 using EndavaTechCourseBankApp.Application.Queries.GetWallets;
 using EndavaTechCourseBankApp.Infrastructure;
+using EndavaTechCourseBankApp.Server.Composition;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace EndavaTechCourseBankApp
+
+namespace EndavaTechCourseBankApp.Server
 {
     public class Program
     {
@@ -10,9 +14,10 @@ namespace EndavaTechCourseBankApp
         {
             var builder = WebApplication.CreateBuilder(args);
             var configuration = builder.Configuration;
-            // Add services to the container.
 
+            // Add services to the container.
             builder.Services.AddInfrastructure(configuration);
+            builder.Services.AddJwtIdentity(configuration);
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
@@ -20,11 +25,8 @@ namespace EndavaTechCourseBankApp
             {
                 config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
                 config.RegisterServicesFromAssemblies(typeof(GetWalletsQuery).Assembly);
-                config.RegisterServicesFromAssemblies(typeof(AddCurrencyCommand).Assembly);
-
-
+                config.RegisterServicesFromAssemblies(typeof(CreateWalletCommand).Assembly);
             });
-
 
             var app = builder.Build();
 
@@ -38,11 +40,17 @@ namespace EndavaTechCourseBankApp
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
-
 
             app.MapRazorPages();
             app.MapControllers();

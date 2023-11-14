@@ -18,7 +18,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.RegisterUser
         private readonly UserManager<User> userManager;
 
 
-        public RegisterUserHandler(ApplicationDbContext context) 
+        public RegisterUserHandler(ApplicationDbContext context, UserManager<User> userManager) 
         {
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(userManager);

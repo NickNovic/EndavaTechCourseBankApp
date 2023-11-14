@@ -1,4 +1,5 @@
 ﻿using AutoFixture.Idioms;
+using EndavaTechCourse.BankApp.Test.Common;
 using EndavaTechCourseBankApp.Application.Commands.AddCurrency;
 using EndavaTechCourseBankApp.Application.Commands.CreateWallet;
 using EndavaTechCourseBankApp.Application.Commands.DeleteCurrencyById;
@@ -13,7 +14,6 @@ using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Server.Controllers;
 using EndavaTechCourseBankApp.Shared;
-using EndavaTechCourseBankApp.Test.Common;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using System;

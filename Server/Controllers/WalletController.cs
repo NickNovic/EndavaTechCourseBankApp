@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
 using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -29,8 +30,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             this._mediator = mediator;
         }
 
+        
         [HttpPost]
-        public async Task CreateWallet([FromBody] CreateWalletDTO createWalletDTO)
+        [Authorize(Roles = "User, Admin")]
+        public async Task<IActionResult> CreateWallet([FromBody] CreateWalletDTO createWalletDTO)
         {
             var query = new CreateWalletCommand
             {
@@ -40,7 +43,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             };
 
             await _mediator.Send(query);
-            
+            return Ok();
         }
 
         [HttpGet]

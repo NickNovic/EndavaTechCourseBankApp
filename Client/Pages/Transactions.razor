@@ -1,0 +1,48 @@
+﻿@page "/transactions"
+
+@inject HttpClient httpClient;
+
+<h3>Transactions</h3>
+
+@if(transactions != null)
+{
+    <MudTable Items="@transactions">
+        <HeaderContent>
+            <MudTh>CurrencyId</MudTh>
+            <MudTh>Amount</MudTh>
+            <MudTh>Commision</MudTh>
+            <MudTh>ChangeRate</MudTh>
+            <MudTh>Description</MudTh>
+            <MudTh>Date</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.CurrencyId</MudTd>
+            <MudTd>@context.Amount</MudTd>
+            <MudTd>@context.Commision</MudTd>
+            <MudTd>@context.ChangeRate</MudTd>
+            <MudTd>@context.Description</MudTd>
+            <MudTd>@context.Date</MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+else
+{
+    <MudText>There is no transactions</MudText>
+}
+
+@code {
+    public List<TransactionDTO> transactions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        transactions = await GetTransactions();
+
+        StateHasChanged();
+        await base.OnInitializedAsync();
+    }
+
+    public async Task<List<TransactionDTO>> GetTransactions()
+    {
+        return await httpClient.GetFromJsonAsync<List<TransactionDTO>>("");
+    }
+}

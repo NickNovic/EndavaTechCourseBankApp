@@ -5,8 +5,11 @@
 <br />
 <br />
 
-<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
-
+<AuthorizeView>
+    <Authorized>
+        <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+    </Authorized>
+</AuthorizeView>
 
 @if(wallets == null || !wallets.Any())
 {
