@@ -10,7 +10,6 @@
         <HeaderContent>
             <MudTh>CurrencyId</MudTh>
             <MudTh>Amount</MudTh>
-            <MudTh>Commision</MudTh>
             <MudTh>ChangeRate</MudTh>
             <MudTh>Description</MudTh>
             <MudTh>Date</MudTh>
@@ -18,7 +17,6 @@
         <RowTemplate>
             <MudTd>@context.CurrencyId</MudTd>
             <MudTd>@context.Amount</MudTd>
-            <MudTd>@context.Commision</MudTd>
             <MudTd>@context.ChangeRate</MudTd>
             <MudTd>@context.Description</MudTd>
             <MudTd>@context.Date</MudTd>
@@ -31,7 +29,7 @@ else
 }
 
 @code {
-    public List<TransactionDTO> transactions;
+    public List<GetTransactionDTO> transactions;
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,8 +39,8 @@ else
         await base.OnInitializedAsync();
     }
 
-    public async Task<List<TransactionDTO>> GetTransactions()
+    public async Task<List<GetTransactionDTO>> GetTransactions()
     {
-        return await httpClient.GetFromJsonAsync<List<TransactionDTO>>("");
+        return await httpClient.GetFromJsonAsync<List<GetTransactionDTO>>("");
     }
 }

@@ -25,12 +25,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
             {
                 Type = request.Type,
                 Amount = request.Amount,
-                Currency = new Currency
-                {
-                    ChangeRate = currency.ChangeRate,
-                    CurrencyCode = currency.CurrencyCode,
-                    Name = currency.Name
-                }
+                CurrencyId = currency.Id
             };
 
             await context.wallets.AddAsync(wallet);

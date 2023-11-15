@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace EndavaTechCourseBankApp.Domain.Models
 {
-    class Transaction : BaseEntity
+    public class Transaction : BaseEntity
     {
         public Currency Currency { get; set; }
-        public decimal Amount {  get; set; }
-        public decimal Commision { get; set; }
+        public decimal Amount { get; set; }
         public decimal ChangeRate { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
+        public Guid IdOfSender {get;set;}
+        public Guid IdOfAccepter { get; set; } 
     }
 }

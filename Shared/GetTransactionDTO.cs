@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace EndavaTechCourseBankApp.Shared
 {
-    public class TransactionDTO
+    public class GetTransactionDTO
     {
+        public Guid Id { get; set; }
         public Guid CurrencyId { get; set; }
         public decimal Amount { get; set; }
-        public decimal Commision { get; set; }
         public decimal ChangeRate { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
+        public Guid IdOfAccepter { get; set; }
+        public Guid IdOfSender { get;set; }
     }
 }

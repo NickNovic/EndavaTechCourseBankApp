@@ -20,7 +20,7 @@ namespace EndavaTechCourseBankApp.Application.Queries.GetWalletsById
 
         public async Task<Wallet> Handle(GetWalletByIdQuery request, CancellationToken cancellationToken)
         {
-            var wallet = await context.wallets.Include(c => c.Currency).FirstOrDefaultAsync(w => w.Id == request.Id);
+            var wallet = await context.wallets.FirstOrDefaultAsync(w => w.Id == request.Id);
             return wallet;
         }
     }
