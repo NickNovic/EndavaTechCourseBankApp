@@ -14,6 +14,7 @@ using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
 using Microsoft.AspNetCore.Authorization;
 using EndavaTechCourseBankApp.Server.Common.JwtToken;
 using EndavaTechCourseBankApp.Application.Commands.TransferFounds;
+using System.Diagnostics;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -27,11 +28,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         {
             ArgumentNullException.ThrowIfNull(dbContext);
             ArgumentNullException.ThrowIfNull(mediator);
-            
+
             _context = dbContext;
             this._mediator = mediator;
         }
-
         
         [HttpPost]
         [Authorize(Roles = "User, Admin")]
@@ -41,8 +41,11 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             {
                 Type = createWalletDTO.Type,
                 Amount = createWalletDTO.Amount,
-                CurrencyCode = createWalletDTO.CurrencyCode
+                CurrencyCode = createWalletDTO.CurrencyCode,
+                UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value)
             };
+            
+            Debug.WriteLine("here");
 
             await _mediator.Send(query);
             return Ok();
@@ -53,16 +56,11 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Authorize(Roles = "User, Admin")]
         public async Task<List<GetWalletDTO>> GetWallets()
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(x => x.Type == Constants.UserIdClaimName);
-
-            if(userIdClaim == null)
-            {
-                return new List<GetWalletDTO>();
-            }
-            var userId = userIdClaim.Value;
-
             List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
-            var query = new GetWalletsQuery();
+            var query = new GetWalletsQuery 
+            { 
+                UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == Constants.UserIdClaimName).Value)
+            };
             var wallets = await _mediator.Send(query);
 
             foreach (Wallet w in wallets)
@@ -144,6 +142,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
         [HttpPost]
         [Authorize(Roles = "User, Amdin")]
+        [Route("transfer")]
         public async Task<IActionResult> TranserFounds([FromBody] TransferDTO transfer)  
         {
             var getCurrencyQuery = new GetCurrencyByIdQuery() { Id = transfer.CurrencyId };

@@ -30,6 +30,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
 
             Currency senderCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == sender.CurrencyId);
             Currency accepterCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == accepter.CurrencyId);
+            
 
             var transferCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == request.CurrencyId);
 

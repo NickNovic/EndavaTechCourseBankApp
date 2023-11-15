@@ -56,9 +56,6 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<decimal>("ChangeRate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Commision")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<Guid>("CurrencyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -178,6 +175,9 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyId");
@@ -215,13 +215,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6f91df2d-15b9-40bd-8380-7e471069eaa6"),
+                            Id = new Guid("639241ee-21d4-4838-b703-f507fa4ec810"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("2dd1c77a-f6f8-4d61-b163-0f5abce8d5b6"),
+                            Id = new Guid("4ce7994c-e808-46e0-8fdf-99d58a2fb795"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -343,13 +343,11 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Wallet", b =>
                 {
-                    b.HasOne("EndavaTechCourseBankApp.Domain.Models.Currency", "Currency")
+                    b.HasOne("EndavaTechCourseBankApp.Domain.Models.Currency", null)
                         .WithMany("Wallets")
                         .HasForeignKey("CurrencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Currency");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
