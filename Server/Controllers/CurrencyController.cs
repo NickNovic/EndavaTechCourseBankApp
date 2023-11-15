@@ -1,10 +1,12 @@
 ﻿using EndavaTechCourseBankApp.Application.Commands.AddCurrency;
 using EndavaTechCourseBankApp.Application.Commands.DeleteCurrencyById;
+using EndavaTechCourseBankApp.Application.Commands.UpdateCurrency;
 using EndavaTechCourseBankApp.Application.Queries.GetCurrencies;
 using EndavaTechCourseBankApp.Application.Queries.GetCurrencyById;
 using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,12 +25,15 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<List<CurrencyDTO>> GetCurrencyes()
+        public async Task<ActionResult<List<CurrencyDTO>>> GetCurrencyes()
         {
             var currencyesRes = new List<CurrencyDTO>();
 
             var query = new GetCurrenciesQuery();
             var result = await mediator.Send(query);
+            if (result == null)
+                return BadRequest("result is null");
+
             foreach (var c in result) {
                 currencyesRes.Add(new CurrencyDTO
                 {
@@ -44,6 +49,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddCurrency([FromBody] CurrencyDTO currencyDTO)
         {
             var command = new AddCurrencyCommand
@@ -69,11 +75,32 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpPost]
-        [Route("{id}")]
-        public async Task DeleteCurrencyById(Guid id)
+        [Route("delete")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteCurrencyById([FromBody]Guid id)
         {
             DeleteCurrencyByIdCommand request = new DeleteCurrencyByIdCommand { Id = id };
+            var res = await mediator.Send(request);
+            if (res.IsSuccessful && res != null)
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Route("update")]
+        public async Task<ActionResult> UpdateCurrency([FromBody]UpdateCurrencyDTO currencyDTO) 
+        {
+            var request = new UpdateCurrencyCommand() 
+            {
+                CurrencyId = currencyDTO.CurrencyId,
+                CurrencyCode = currencyDTO.CurrencyCode,
+                ChangeRate = currencyDTO.ChangeRate,
+                Name = currencyDTO.Name
+            };
+
             await mediator.Send(request);
+
+            return Ok();
         }
     }
 }

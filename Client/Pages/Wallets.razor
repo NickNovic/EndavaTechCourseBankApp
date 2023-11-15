@@ -5,8 +5,11 @@
 <br />
 <br />
 
-<MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
-
+<AuthorizeView>
+    <Authorized>
+        <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+    </Authorized>
+</AuthorizeView>
 
 @if(wallets == null || !wallets.Any())
 {
@@ -31,9 +34,9 @@ else
             <MudTd>@context.Type</MudTd>
             <MudTd>@context.Amount</MudTd>
             <MudTd>@context.Pincode</MudTd>
-            <MudTd>@context.Currency.CurrencyCode</MudTd>
-                <MudTd>@context.Currency.ChangeRate</MudTd>
-                <MudTd>@context.Currency.Name</MudTd>
+            <MudTd>@context.CurrencyCode</MudTd>
+            <MudTd>@context.ChangeRate</MudTd>
+            <MudTd>@context.CurrencyName</MudTd>
         </RowTemplate>
     </MudTable>
 }

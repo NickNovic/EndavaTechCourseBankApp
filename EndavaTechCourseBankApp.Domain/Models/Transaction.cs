@@ -14,5 +14,6 @@ namespace EndavaTechCourseBankApp.Domain.Models
         public decimal Commision { get; set; }
         public decimal ChangeRate { get; set; }
         public string Description { get; set; }
+        public DateTime Date { get; set; }
     }
 }

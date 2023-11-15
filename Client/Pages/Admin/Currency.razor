@@ -15,7 +15,7 @@
                     <MudTh>Denumirea</MudTh>
                     <MudTh>Codul</MudTh>
                     <MudTh>Rata de schimb</MudTh>
-                    <MudTh></MudTh>
+                    <AuthorizeView><Authorized><MudTh></MudTh></Authorized></AuthorizeView>
                 </HeaderContent>
                 <ColGroup>
                     <col style="width: 50%;" />
@@ -31,8 +31,11 @@
                     <MudTd DataLabel="Nr">
                         @if(context.CanBeRemoved)
                         {
-                            <MudButton Color="Color.Error" OnClick="@((e) => DeleteCurrency(context.Id))">Sterge</MudButton>
-                        }
+                            <AuthorizeView><Authorized Context="contextName">
+                                    <MudButton Color="Color.Error" OnClick="@((e) => DeleteCurrency(context.Id))">Sterge</MudButton>
+
+                                </Authorized></AuthorizeView>
+                            }
                     </MudTd>
                 </RowTemplate>
             </MudTable>
@@ -46,6 +49,8 @@
     </MudItem>
 
     <MudItem md="4">
+        <AuthorizeView>
+            <Authorized>
         <MudGrid>
             <MudItem md="12" Class="mt-4">
                 <MudText>Valuta noua : </MudText>
@@ -76,8 +81,11 @@
                 }
             </MudItem>
         </MudGrid>
+        </Authorized>
+        </AuthorizeView>
     </MudItem>
 </MudGrid>
+
 
 @code {
     private List<CurrencyDTO> currencies;

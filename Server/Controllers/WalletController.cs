@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
+using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
+using Microsoft.AspNetCore.Authorization;
+using EndavaTechCourseBankApp.Server.Common.JwtToken;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -28,8 +31,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             this._mediator = mediator;
         }
 
+        
         [HttpPost]
-        public async Task CreateWallet([FromBody] CreateWalletDTO createWalletDTO)
+        [Authorize(Roles = "User, Admin")]
+        public async Task<IActionResult> CreateWallet([FromBody] CreateWalletDTO createWalletDTO)
         {
             var query = new CreateWalletCommand
             {
@@ -39,14 +44,23 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             };
 
             await _mediator.Send(query);
-            
+            return Ok();
         }
 
         [HttpGet]
         [Route("getwallets")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<List<GetWalletDTO>> GetWallets()
         {
-           List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(x => x.Type == Constants.UserIdClaimName);
+
+            if(userIdClaim == null)
+            {
+                return new List<GetWalletDTO>();
+            }
+            var userId = userIdClaim.Value;
+
+            List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
             var query = new GetWalletsQuery();
             var wallets = await _mediator.Send(query);
 
@@ -56,7 +70,9 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 {
                     WalletId = w.Id,
                     Amount = w.Amount,
-                    Currency = w.Currency,
+                    CurrencyCode = w.Currency.CurrencyCode,
+                    ChangeRate = w.Currency.ChangeRate,
+                    CurrencyName = w.Currency.Name,
                     Pincode = w.Pincode,
                     LastActivity = w.LastActivity,
                     Type = w.Type
@@ -78,7 +94,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             return new GetWalletDTO {
                 WalletId = w.Id,
                 Amount = w.Amount,
-                Currency = w.Currency,
+                //Currency = w.Currency,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
                 Type = w.Type
@@ -86,10 +102,37 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
         [HttpPost]
         [Route("{id}")]
-        public async Task DeleteWalletById(Guid id)
+        public async Task<IActionResult> DeleteWalletById(Guid id)
         {
             DeleteWalletByIdCommand request = new DeleteWalletByIdCommand { Id = id };
             await _mediator.Send(request);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("update")]
+        public async Task<IActionResult> UpdateWalletById([FromBody]UpdateWalletDTO walletDTO)
+        {
+            var currequest = new GetCurrencyByIdQuery()
+            {
+                Id = walletDTO.CurrencyId
+            };
+            var resCur = await _mediator.Send(currequest);
+
+            var request = new UpdateWalletCommand() 
+            {
+                Amount = walletDTO.Amount,
+                Currency = resCur,
+                Pincode = walletDTO.Pincode,
+                LastActivity = DateTime.Now,
+                Type = walletDTO.Type,
+                CurrencyId = walletDTO.CurrencyId,
+                WalletId = walletDTO.WalletId
+            };
+
+            var res = await _mediator.Send(request);
+            return res.IsSuccessful ? Ok() : BadRequest();
         }
     }
 }

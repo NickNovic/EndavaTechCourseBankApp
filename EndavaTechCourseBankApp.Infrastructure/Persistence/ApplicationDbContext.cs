@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EndavaTechCourseBankApp.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using EndavaTechCourseBankApp.Infrastructure.Новая_папка;
 
 namespace EndavaTechCourseBankApp.Infrastructure.Persistence
 {
@@ -30,7 +31,8 @@ namespace EndavaTechCourseBankApp.Infrastructure.Persistence
                 .WithOne(e => e.Currency)
                 .HasForeignKey(e => e.CurrencyId)
                 .IsRequired();
-            
+
+            modelBuilder.ApplyConfiguration(new RoleConfigurations());
             
             base.OnModelCreating(modelBuilder);
         }
