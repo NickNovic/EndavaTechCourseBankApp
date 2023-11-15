@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
 using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
 using Microsoft.AspNetCore.Authorization;
+using EndavaTechCourseBankApp.Server.Common.JwtToken;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -48,9 +49,18 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
         [HttpGet]
         [Route("getwallets")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<List<GetWalletDTO>> GetWallets()
         {
-           List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(x => x.Type == Constants.UserIdClaimName);
+
+            if(userIdClaim == null)
+            {
+                return new List<GetWalletDTO>();
+            }
+            var userId = userIdClaim.Value;
+
+            List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
             var query = new GetWalletsQuery();
             var wallets = await _mediator.Send(query);
 
