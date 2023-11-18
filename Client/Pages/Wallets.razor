@@ -8,6 +8,7 @@
 <AuthorizeView>
     <Authorized>
         <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+        <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="CreateTransaction">New transaction</MudButton>
     </Authorized>
 </AuthorizeView>
 
@@ -60,5 +61,9 @@ else
     public void RedirectToCreateWallet()
     {
         navManager.NavigateTo("/create-wallet");
+    }
+    public void CreateTransaction()
+    {
+        navManager.NavigateTo("/create-transaction");
     }
 }

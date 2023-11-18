@@ -73,6 +73,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
                 walletsRes.Add(new GetWalletDTO
                 {
+                    CurrencyId = currency.Id,
                     WalletId = w.Id,
                     Amount = w.Amount,
                     CurrencyCode = currency.CurrencyCode,

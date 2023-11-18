@@ -19,7 +19,6 @@
     <MudText>Last activity: @wallet.LastActivity</MudText>
     <MudText>Type: @wallet.Type</MudText>
     <MudText>Pincode: @wallet.Pincode</MudText>
-
 }
 
 @code {
@@ -36,5 +35,5 @@
     {
         Guid id = Guid.Parse(stringId);
         wallet = await this.httpClient.GetFromJsonAsync<GetWalletDTO>("api/wallet/" + id.ToString());
-    }
+    }    
 }

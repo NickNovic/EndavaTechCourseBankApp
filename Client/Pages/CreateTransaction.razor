@@ -1,0 +1,60 @@
+﻿@page "/create-transaction"
+@inject NavigationManager navManager;
+@inject HttpClient httpClient;
+
+<h3>Create Transaction</h3>
+
+@if(wallets == null || walletStrings == null)
+{
+    <MudText>You have no wallets</MudText>
+}
+else
+{
+    <MudSelect  T="string" Items="@walletStrings" onselect="SetTransaction">
+        @foreach(string s in walletStrings)
+        {
+            <MudSelectItem T="string">@s</MudSelectItem>            
+        }
+    </MudSelect>
+    <MudTextField T="decimal" Label="Amount" @bind-Value="Amount"></MudTextField>
+
+    <MudButton>Create transaction</MudButton>
+}
+
+@code {
+    public List<GetWalletDTO> wallets;
+    public List<string> walletStrings;
+
+    public decimal Amount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetWalletsForUser();
+        await ParseWalletsInfoIntoString();
+        await base.OnInitializedAsync();
+    }
+    public void SetTransaction()
+    {
+    }
+
+    public async Task GetWalletsForUser()
+    {
+        wallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+    }
+    public async Task ParseWalletsInfoIntoString()
+    {
+        walletStrings = new List<string>();
+        foreach(GetWalletDTO w in wallets)
+        {
+            CurrencyDTO currency = await this.httpClient.GetFromJsonAsync<CurrencyDTO>("api/currencies/" + w.CurrencyId.ToString());
+            walletStrings.Add("Id: " + w.Id.ToString() +" Currency: " + currency.CurrencyCode.ToString() + " Amount: " + w.Amount.ToString());
+        }
+    }
+    public async Task CreateTranasaction()
+    {
+        var trs = new TransferDTO
+        {
+
+        };
+    }
+}
