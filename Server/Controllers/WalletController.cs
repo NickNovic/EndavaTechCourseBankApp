@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authorization;
 using EndavaTechCourseBankApp.Server.Common.JwtToken;
 using EndavaTechCourseBankApp.Application.Commands.TransferFounds;
 using System.Diagnostics;
+using EndavaTechCourseBankApp.Application.Queries.GetTransactions;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -100,7 +102,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             return new GetWalletDTO {
                 WalletId = w.Id,
                 Amount = w.Amount,
-                //Currency = w.Currency,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
                 Type = w.Type
@@ -142,25 +143,42 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "User, Amdin")]
+        [Authorize(Roles = "User, Admin")]
         [Route("transfer")]
         public async Task<IActionResult> TranserFounds([FromBody] TransferDTO transfer)  
         {
-            var getCurrencyQuery = new GetCurrencyByIdQuery() { Id = transfer.CurrencyId };
-            var currency = await _mediator.Send(getCurrencyQuery);
-
             var query = new TransferFoundsCommand()
             {
                 Amount = transfer.Amount,
                 IdOfAccepter = transfer.IdOfAccepter,
                 Description = transfer.Description,
-                IdOfSender = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == Constants.UserIdClaimName).Value),
+                IdOfSender = transfer.IdOfSender,
                 CurrencyId = transfer.CurrencyId,
                 Date = DateTime.Now
             };
             var res = await _mediator.Send(query);
 
             return res.IsSuccessful ? Ok() : BadRequest();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
+        [Route("gettransactions")]
+        public async Task<IActionResult> GetTransactions() 
+        {
+            var query = new GetTransactionsQuery() 
+            {
+                UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == Constants.UserIdClaimName).Value),
+            };
+
+            var res = await _mediator.Send(query);
+            
+            if(res.IsNullOrEmpty())
+            {
+                return BadRequest();
+            }
+            
+            return Ok(res);
         }
     }
 }

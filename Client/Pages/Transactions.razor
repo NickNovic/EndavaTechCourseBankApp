@@ -8,18 +8,20 @@
 {
     <MudTable Items="@transactions">
         <HeaderContent>
-            <MudTh>CurrencyId</MudTh>
             <MudTh>Amount</MudTh>
             <MudTh>ChangeRate</MudTh>
             <MudTh>Description</MudTh>
             <MudTh>Date</MudTh>
+            <MudTh>Id of sender</MudTh>
+            <MudTh>Id of accepter</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd>@context.CurrencyId</MudTd>
             <MudTd>@context.Amount</MudTd>
             <MudTd>@context.ChangeRate</MudTd>
             <MudTd>@context.Description</MudTd>
             <MudTd>@context.Date</MudTd>
+            <MudTd>@context.IdOfSender</MudTd>
+            <MudTd>@context.IdOfAccepter</MudTd>
         </RowTemplate>
     </MudTable>
 }
@@ -33,14 +35,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        transactions = await GetTransactions();
+        await GetTransactions();
 
         StateHasChanged();
         await base.OnInitializedAsync();
     }
 
-    public async Task<List<GetTransactionDTO>> GetTransactions()
+    public async Task GetTransactions()
     {
-        return await httpClient.GetFromJsonAsync<List<GetTransactionDTO>>("");
+        transactions = await httpClient.GetFromJsonAsync<List<GetTransactionDTO>>("api/wallet/gettransactions");
     }
 }
