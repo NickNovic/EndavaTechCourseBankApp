@@ -24,6 +24,10 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
             {
                 return new CommandStatus(){ IsSuccessful = false, Error = "Amount is invalid" };
             }
+            if(request == null) 
+            {
+                return new CommandStatus() { IsSuccessful = false };
+            }
 
             Wallet sender = await context.wallets.FirstOrDefaultAsync(w => w.Id == request.IdOfSender);
             Wallet accepter = await context.wallets.FirstOrDefaultAsync(w => w.Id == request.IdOfAccepter);

@@ -157,8 +157,9 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 Date = DateTime.Now
             };
             var res = await _mediator.Send(query);
-
-            return res.IsSuccessful ? Ok() : BadRequest();
+            
+            
+            return res != null && res.IsSuccessful ? Ok() : BadRequest();
         }
 
         [HttpGet]
@@ -166,19 +167,18 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Route("gettransactions")]
         public async Task<IActionResult> GetTransactions() 
         {
-            var query = new GetTransactionsQuery() 
+            if(HttpContext != null) 
             {
-                UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == Constants.UserIdClaimName).Value),
-            };
+                var query = new GetTransactionsQuery()
+                {
+                    UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == Constants.UserIdClaimName).Value),
+                };
+                var res = await _mediator.Send(query);
+                return Ok(res);
 
-            var res = await _mediator.Send(query);
-            
-            if(res.IsNullOrEmpty())
-            {
-                return BadRequest();
             }
-            
-            return Ok(res);
+
+            return BadRequest();
         }
     }
 }

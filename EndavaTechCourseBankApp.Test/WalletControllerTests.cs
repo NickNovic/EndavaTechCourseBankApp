@@ -2,14 +2,19 @@
 using EndavaTechCourse.BankApp.Test.Common;
 using EndavaTechCourseBankApp.Application.Commands.CreateWallet;
 using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
+using EndavaTechCourseBankApp.Application.Commands.TransferFounds;
 using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
+using EndavaTechCourseBankApp.Application.Queries.GetTransactions;
 using EndavaTechCourseBankApp.Application.Queries.GetWallets;
 using EndavaTechCourseBankApp.Application.Queries.GetWalletsById;
 using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using EndavaTechCourseBankApp.Server.Controllers;
+using EndavaTechCourseBankApp.Shared;
 using FluentAssertions;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NSubstitute;
 
 namespace EndavaTechCourseBankApp.Test
 {
@@ -54,6 +59,40 @@ namespace EndavaTechCourseBankApp.Test
         }
 
         [Test, ApplicationData]
+        public async Task ShouldTransferFounds([Frozen] ApplicationDbContext context,
+            [Greedy] WalletController controller,
+            TransferDTO transfer,
+            IMediator mediator,
+            TransferFoundsCommand request)
+        {
+            var res = await controller.TranserFounds(transfer);
+
+            res.Should().NotBeNull();
+
+            var mediatorRes = await mediator.Send(request);
+
+            mediator.Received().As<TransferFoundsCommand>();
+        }
+
+
+        [Test, ApplicationData]
+        public async Task ShouldGetTransactions([Frozen] ApplicationDbContext context,
+            [Greedy] WalletController controller,
+            TransferDTO transfer,
+            IMediator mediator,
+            GetTransactionsQuery request)
+        {
+            var res = await controller.GetTransactions();
+
+            res.Should().NotBeNull();
+
+            await mediator.Send(request);
+
+            mediator.Received().As<GetTransactionsQuery>();
+        }
+
+
+        [Test, ApplicationData]
         public async Task CanCreateCreateWalletCommand(GuardClauseAssertion assertion)
             => assertion.Verify(typeof(CreateWalletCommand).GetConstructors());
 
@@ -72,5 +111,14 @@ namespace EndavaTechCourseBankApp.Test
         [Test, ApplicationData]
         public async Task CanCreateGetWalletByIdQuery(GuardClauseAssertion assertion)
             => assertion.Verify(typeof(GetWalletByIdQuery).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateTransferFoundsCommand(GuardClauseAssertion assertion)
+            => assertion.Verify(typeof(TransferFoundsCommand).GetConstructors());
+
+        [Test, ApplicationData]
+        public async Task CanCreateGetTransactionsQuery(GuardClauseAssertion assertion)
+                    => assertion.Verify(typeof(GetTransactionsQuery).GetConstructors());
+
     }
 }
