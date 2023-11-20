@@ -21,18 +21,22 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
         public async Task<CommandStatus> Handle(CreateWalletCommand request, CancellationToken cancellationToken)
         {
             Currency currency = await context.currencies.FirstOrDefaultAsync(c => c.CurrencyCode == request.CurrencyCode);
+            
             if(currency == null) 
             {
                 return new CommandStatus { IsSuccessful = false, Error = "Currency does not exists" };
             }
+
+
+
             var wallet = new Wallet
             {
                 UserId = request.UserId,
                 Type = request.Type,
                 Amount = request.Amount,
-                CurrencyId = currency.Id
+                CurrencyId = currency.Id,
+                WalletCode =                 
             };
-            
             
             await context.wallets.AddAsync(wallet);
             context.SaveChanges();

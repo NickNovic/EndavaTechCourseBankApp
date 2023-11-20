@@ -15,5 +15,6 @@ namespace EndavaTechCourseBankApp.Domain.Models
         public string Type { get; set; }
         public DateTime LastActivity { get; set; }
         public Guid UserId { get; set; }
+        public string WalletCode { get; set; }
     }
 }

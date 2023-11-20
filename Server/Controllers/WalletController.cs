@@ -47,7 +47,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value)
             };
             
-            Debug.WriteLine("here");
 
             await _mediator.Send(query);
             return Ok();
