@@ -2,6 +2,7 @@
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,39 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
                 return new CommandStatus { IsSuccessful = false, Error = "Currency does not exists" };
             }
 
+            Wallet getWal;
+            var rnd = new Random();
+            var walletCode = new WalletCode();
+
+            
+            int code;
+            do
+            {
+                code = rnd.Next(1000, 10000);
+                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.a == code);
+            } while (getWal != null);
+            walletCode.a = code;
+
+            do
+            {
+                code = rnd.Next(1000, 10000);
+                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.b == code);
+            } while (getWal != null);
+            walletCode.b = code;
+
+            do
+            {
+                code = rnd.Next(1000, 10000);
+                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.c == code);
+            } while (getWal != null);
+            walletCode.c = code;
+
+            do
+            {
+                code = rnd.Next(1000, 10000);
+                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.d == code);
+            } while (getWal != null);
+            walletCode.d = code;
 
 
             var wallet = new Wallet
@@ -35,7 +69,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
                 Type = request.Type,
                 Amount = request.Amount,
                 CurrencyId = currency.Id,
-                WalletCode =                 
+                WalletCode = walletCode                
             };
             
             await context.wallets.AddAsync(wallet);

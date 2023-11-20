@@ -28,6 +28,7 @@ else
             <MudTh>Currency Code</MudTh>
             <MudTh>Change Rate</MudTh>
             <MudTh>Name</MudTh>
+            <MudTh>Wallet Code</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd>@context.WalletId</MudTd>
@@ -38,6 +39,7 @@ else
             <MudTd>@context.CurrencyCode</MudTd>
             <MudTd>@context.ChangeRate</MudTd>
             <MudTd>@context.CurrencyName</MudTd>
+            <MudTd>@context.a +"-"+ @context.b"-"+ @context.c"-"+ @context.d</MudTd>
         </RowTemplate>
     </MudTable>
 }

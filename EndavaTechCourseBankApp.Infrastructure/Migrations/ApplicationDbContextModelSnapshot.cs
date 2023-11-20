@@ -178,11 +178,41 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("WalletCodeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyId");
 
+                    b.HasIndex("WalletCodeId");
+
                     b.ToTable("wallets");
+                });
+
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.WalletCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("a")
+                        .HasColumnType("int");
+
+                    b.Property<int>("b")
+                        .HasColumnType("int");
+
+                    b.Property<int>("c")
+                        .HasColumnType("int");
+
+                    b.Property<int>("d")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WalletCode");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -215,13 +245,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("639241ee-21d4-4838-b703-f507fa4ec810"),
+                            Id = new Guid("0fab00df-e5cc-459d-b5a7-60f68a820083"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("4ce7994c-e808-46e0-8fdf-99d58a2fb795"),
+                            Id = new Guid("e248259c-3927-4299-8112-dd1f212becf3"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -348,6 +378,14 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                         .HasForeignKey("CurrencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("EndavaTechCourseBankApp.Domain.Models.WalletCode", "WalletCode")
+                        .WithMany()
+                        .HasForeignKey("WalletCodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WalletCode");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
