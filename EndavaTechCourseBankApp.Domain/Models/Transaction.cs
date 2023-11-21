@@ -14,7 +14,7 @@ namespace EndavaTechCourseBankApp.Domain.Models
         public decimal ChangeRate { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public Guid IdOfSender {get;set;}
-        public Guid IdOfAccepter { get; set; } 
+        public string CodeOfSender {get;set;}
+        public string CodeOfAccepter { get; set; } 
     }
 }

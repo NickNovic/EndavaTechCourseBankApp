@@ -28,7 +28,7 @@ namespace EndavaTechCourseBankApp.Application.Queries.GetTransactions
 
             foreach (var w in wals)
             {
-                var transactionsforwallet = await context.transactions.Where(t => t.IdOfSender == w.Id || t.IdOfAccepter == w.Id).ToListAsync();
+                var transactionsforwallet = await context.transactions.Where(t => t.CodeOfSender == w.Code || t.CodeOfAccepter == w.Code).ToListAsync();
                 transactions.AddRange(transactionsforwallet);
             }
             

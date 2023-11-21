@@ -56,6 +56,14 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<decimal>("ChangeRate")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("CodeOfAccepter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeOfSender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("CurrencyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -65,12 +73,6 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("IdOfAccepter")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IdOfSender")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -162,6 +164,10 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("CurrencyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -178,41 +184,11 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("WalletCodeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyId");
 
-                    b.HasIndex("WalletCodeId");
-
                     b.ToTable("wallets");
-                });
-
-            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.WalletCode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("a")
-                        .HasColumnType("int");
-
-                    b.Property<int>("b")
-                        .HasColumnType("int");
-
-                    b.Property<int>("c")
-                        .HasColumnType("int");
-
-                    b.Property<int>("d")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WalletCode");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -245,13 +221,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0fab00df-e5cc-459d-b5a7-60f68a820083"),
+                            Id = new Guid("8b4c9835-e4ac-4d92-85bb-e4ccc3ebd0b2"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("e248259c-3927-4299-8112-dd1f212becf3"),
+                            Id = new Guid("9670fb95-c6f5-4f27-8455-218e39da1b98"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -378,14 +354,6 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                         .HasForeignKey("CurrencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("EndavaTechCourseBankApp.Domain.Models.WalletCode", "WalletCode")
-                        .WithMany()
-                        .HasForeignKey("WalletCodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WalletCode");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

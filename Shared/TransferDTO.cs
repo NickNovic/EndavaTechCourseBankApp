@@ -11,7 +11,7 @@ namespace EndavaTechCourseBankApp.Shared
         public Guid CurrencyId { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public Guid IdOfAccepter { get; set; }
-        public Guid IdOfSender { get; set; }
+        public string CodeOfAccepter { get; set; }
+        public string CodeOfSender { get; set; }
     }
 }

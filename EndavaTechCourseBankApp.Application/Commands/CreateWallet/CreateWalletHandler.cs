@@ -33,35 +33,15 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
             var walletCode = new WalletCode();
 
             
-            int code;
+            string wCode = "";
             do
             {
-                code = rnd.Next(1000, 10000);
-                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.a == code);
-            } while (getWal != null);
-            walletCode.a = code;
-
-            do
-            {
-                code = rnd.Next(1000, 10000);
-                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.b == code);
-            } while (getWal != null);
-            walletCode.b = code;
-
-            do
-            {
-                code = rnd.Next(1000, 10000);
-                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.c == code);
-            } while (getWal != null);
-            walletCode.c = code;
-
-            do
-            {
-                code = rnd.Next(1000, 10000);
-                getWal = context.wallets.FirstOrDefault(w => w.WalletCode.d == code);
-            } while (getWal != null);
-            walletCode.d = code;
-
+                wCode = "";
+                for (int i = 0; i < 4; i++)
+                {
+                    wCode += rnd.Next(1000, 9999).ToString();
+                }
+            } while (context.wallets.FirstOrDefault(w => w.Code == wCode) != null);
 
             var wallet = new Wallet
             {
@@ -69,7 +49,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
                 Type = request.Type,
                 Amount = request.Amount,
                 CurrencyId = currency.Id,
-                WalletCode = walletCode                
+                Code = wCode                
             };
             
             await context.wallets.AddAsync(wallet);

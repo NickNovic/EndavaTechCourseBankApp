@@ -29,8 +29,8 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
                 return new CommandStatus() { IsSuccessful = false };
             }
 
-            Wallet sender = await context.wallets.FirstOrDefaultAsync(w => w.Id == request.IdOfSender);
-            Wallet accepter = await context.wallets.FirstOrDefaultAsync(w => w.Id == request.IdOfAccepter);
+            Wallet sender = await context.wallets.FirstOrDefaultAsync(w => w.Code == request.CodeOfSender);
+            Wallet accepter = await context.wallets.FirstOrDefaultAsync(w => w.Code == request.CodeOfAccepter);
 
             Currency senderCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == sender.CurrencyId);
             Currency accepterCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == accepter.CurrencyId);
@@ -66,8 +66,8 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
                 ChangeRate = transferCurrency.ChangeRate,
                 Description = request.Description, 
                 Date = DateTime.Now,
-                IdOfSender = sender.Id,
-                IdOfAccepter = accepter.Id,
+                CodeOfSender = sender.Code,
+                CodeOfAccepter = accepter.Code,
             };
             
             context.transactions.Add(transaction);

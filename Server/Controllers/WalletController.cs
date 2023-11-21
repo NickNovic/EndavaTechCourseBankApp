@@ -82,7 +82,8 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                     CurrencyName = currency.Name,
                     Pincode = w.Pincode,
                     LastActivity = w.LastActivity,
-                    Type = w.Type
+                    Type = w.Type,
+                    Code = w.Code
                 });
             }
             return walletsRes;
@@ -149,9 +150,9 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             var query = new TransferFoundsCommand()
             {
                 Amount = transfer.Amount,
-                IdOfAccepter = transfer.IdOfAccepter,
+                CodeOfAccepter = transfer.CodeOfAccepter,
                 Description = transfer.Description,
-                IdOfSender = transfer.IdOfSender,
+                CodeOfSender = transfer.CodeOfSender,
                 CurrencyId = transfer.CurrencyId,
                 Date = DateTime.Now
             };
