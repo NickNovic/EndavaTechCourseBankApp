@@ -14,4 +14,5 @@ public class GetWalletDTO : BaseEntity
     public string Type { get; set; }
     public DateTime LastActivity { get; set; }
     public Guid CurrencyId { get; set; }
+    public string Code { get; set; }
 }

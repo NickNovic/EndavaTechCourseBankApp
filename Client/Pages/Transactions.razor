@@ -8,20 +8,20 @@
 {
     <MudTable Items="@transactions">
         <HeaderContent>
-            <MudTh>CurrencyId</MudTh>
             <MudTh>Amount</MudTh>
-            <MudTh>Commision</MudTh>
             <MudTh>ChangeRate</MudTh>
             <MudTh>Description</MudTh>
             <MudTh>Date</MudTh>
+            <MudTh>Id of sender</MudTh>
+            <MudTh>Id of accepter</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd>@context.CurrencyId</MudTd>
             <MudTd>@context.Amount</MudTd>
-            <MudTd>@context.Commision</MudTd>
             <MudTd>@context.ChangeRate</MudTd>
             <MudTd>@context.Description</MudTd>
             <MudTd>@context.Date</MudTd>
+            <MudTd>@context.CodeOfSender</MudTd>
+            <MudTd>@context.CodeOfAccepter</MudTd>
         </RowTemplate>
     </MudTable>
 }
@@ -31,18 +31,18 @@ else
 }
 
 @code {
-    public List<TransactionDTO> transactions;
+    public List<GetTransactionDTO> transactions;
 
     protected override async Task OnInitializedAsync()
     {
-        transactions = await GetTransactions();
+        await GetTransactions();
 
         StateHasChanged();
         await base.OnInitializedAsync();
     }
 
-    public async Task<List<TransactionDTO>> GetTransactions()
+    public async Task GetTransactions()
     {
-        return await httpClient.GetFromJsonAsync<List<TransactionDTO>>("");
+        transactions = await httpClient.GetFromJsonAsync<List<GetTransactionDTO>>("api/wallet/gettransactions");
     }
 }

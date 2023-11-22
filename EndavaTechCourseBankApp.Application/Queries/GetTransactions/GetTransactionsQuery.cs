@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EndavaTechCourseBankApp.Application.Queries.GetWallets
+namespace EndavaTechCourseBankApp.Application.Queries.GetTransactions
 {
-    public class GetWalletsQuery : IRequest<List<Wallet>>
+    public class GetTransactionsQuery : IRequest<List<Transaction>>
     {
         public Guid UserId { get; set; }
     }

@@ -1,0 +1,83 @@
+﻿@page "/create-transaction"
+@inject NavigationManager navManager;
+@inject HttpClient httpClient;
+
+<h3>Create Transaction</h3>
+
+@if(wallets == null || Codes == null)
+{
+    <MudText>You have no wallets</MudText>
+}
+else
+{
+    <MudSelect T="string" Items="@Codes" For="@(()=>SelectedSenderCode)" ValueChanged="((string selectedId)=>SelectWallet(selectedId))">
+        @foreach(string s in Codes)
+        {
+            <MudSelectItem T="string" Value="@s">@s.ToString()</MudSelectItem>
+        }
+    </MudSelect>
+    <MudTextField T="decimal" Label="Amount" @bind-Value="Amount"></MudTextField>
+    <MudTextField T="string" Label="Id of Accepter Wallet" @bind-Value="CodeOfAccepter"></MudTextField>
+    <MudTextField T="string" Label="Description" @bind-Value="Description"></MudTextField>
+    <MudButton OnClick="CreateTranasaction">Create transaction</MudButton>
+
+    <MudText>Currency: @CurrencyCode</MudText>
+    <MudText>Amount: @walletAmount</MudText>
+    <MudText>Type: @walletType</MudText>
+}
+
+@code {
+    public List<GetWalletDTO> wallets;
+    public List<string> Codes;
+    public string SelectedSenderCode;
+    public string _selectedSenderCode;
+
+    public decimal Amount;
+    public string CodeOfAccepter;
+    public string Description;
+
+    public string CurrencyCode;
+    public string walletType;
+    public decimal walletAmount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetWalletsForUser();
+        await base.OnInitializedAsync();
+    }
+    public async void SelectWallet(string id)
+    {
+        SelectedSenderCode = id;
+        GetWalletDTO w = wallets.FirstOrDefault(w => w.Code == SelectedSenderCode);
+        CurrencyDTO currency = await this.httpClient.GetFromJsonAsync<CurrencyDTO>("api/currencies/" + w.CurrencyId.ToString());
+        CurrencyCode = currency.CurrencyCode;
+        walletAmount = w.Amount;
+        walletType = w.Type;
+
+        StateHasChanged();
+    }
+
+    public async Task GetWalletsForUser()
+    {
+        wallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+
+        Codes = new List<string>();
+        foreach (GetWalletDTO w in wallets)
+        {
+            Codes.Add(w.Code);
+        }
+    }
+    public async Task CreateTranasaction()
+    {
+        var trs = new TransferDTO
+        {
+            Amount = this.Amount,
+            CurrencyId = wallets.FirstOrDefault(w => w.Code == SelectedSenderCode).CurrencyId,
+            Description = this.Description,
+            CodeOfAccepter = this.CodeOfAccepter,
+            CodeOfSender = SelectedSenderCode
+        };
+
+        var res = await this.httpClient.PostAsJsonAsync("api/wallet/transfer", trs);
+    }
+}

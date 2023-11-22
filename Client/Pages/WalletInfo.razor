@@ -14,12 +14,12 @@
     <p>Nothing to be displayed yet...</p>
 }else
 {
-    <MudText>Id: @wallet.Id</MudText>
+    <MudText>Id: @wallet.WalletId</MudText>
     <MudText>Amount: @wallet.Amount</MudText>
     <MudText>Last activity: @wallet.LastActivity</MudText>
     <MudText>Type: @wallet.Type</MudText>
     <MudText>Pincode: @wallet.Pincode</MudText>
-
+    <MudText>Code: @wallet.Code</MudText>
 }
 
 @code {
@@ -36,5 +36,5 @@
     {
         Guid id = Guid.Parse(stringId);
         wallet = await this.httpClient.GetFromJsonAsync<GetWalletDTO>("api/wallet/" + id.ToString());
-    }
+    }    
 }

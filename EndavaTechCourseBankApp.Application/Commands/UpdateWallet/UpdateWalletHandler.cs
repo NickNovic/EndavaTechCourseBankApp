@@ -26,7 +26,6 @@ namespace EndavaTechCourseBankApp.Application.Commands.UpdateWallet
             }
 
             wallet.Amount = request.Amount;
-            wallet.Currency = request.Currency;
             wallet.Pincode = request.Pincode;
             wallet.CurrencyId = request.CurrencyId;
             wallet.LastActivity = request.LastActivity;

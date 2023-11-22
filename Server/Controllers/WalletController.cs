@@ -13,6 +13,10 @@ using EndavaTechCourseBankApp.Application.Commands.DeleteWalletById;
 using EndavaTechCourseBankApp.Application.Commands.UpdateWallet;
 using Microsoft.AspNetCore.Authorization;
 using EndavaTechCourseBankApp.Server.Common.JwtToken;
+using EndavaTechCourseBankApp.Application.Commands.TransferFounds;
+using System.Diagnostics;
+using EndavaTechCourseBankApp.Application.Queries.GetTransactions;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -26,11 +30,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         {
             ArgumentNullException.ThrowIfNull(dbContext);
             ArgumentNullException.ThrowIfNull(mediator);
-            
+
             _context = dbContext;
             this._mediator = mediator;
         }
-
         
         [HttpPost]
         [Authorize(Roles = "User, Admin")]
@@ -40,8 +43,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             {
                 Type = createWalletDTO.Type,
                 Amount = createWalletDTO.Amount,
-                CurrencyCode = createWalletDTO.CurrencyCode
+                CurrencyCode = createWalletDTO.CurrencyCode,
+                UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value)
             };
+            
 
             await _mediator.Send(query);
             return Ok();
@@ -52,30 +57,33 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Authorize(Roles = "User, Admin")]
         public async Task<List<GetWalletDTO>> GetWallets()
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(x => x.Type == Constants.UserIdClaimName);
-
-            if(userIdClaim == null)
-            {
-                return new List<GetWalletDTO>();
-            }
-            var userId = userIdClaim.Value;
-
             List<GetWalletDTO> walletsRes = new List<GetWalletDTO>();
-            var query = new GetWalletsQuery();
+            var query = new GetWalletsQuery 
+            { 
+                UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == Constants.UserIdClaimName).Value)
+            };
             var wallets = await _mediator.Send(query);
 
             foreach (Wallet w in wallets)
             {
+                var getCurrencyForDTO = new GetCurrencyByIdQuery()
+                {
+                    Id = w.CurrencyId
+                };
+                var currency = await _mediator.Send(getCurrencyForDTO);
+
                 walletsRes.Add(new GetWalletDTO
                 {
+                    CurrencyId = currency.Id,
                     WalletId = w.Id,
                     Amount = w.Amount,
-                    CurrencyCode = w.Currency.CurrencyCode,
-                    ChangeRate = w.Currency.ChangeRate,
-                    CurrencyName = w.Currency.Name,
+                    CurrencyCode = currency.CurrencyCode,
+                    ChangeRate = currency.ChangeRate,
+                    CurrencyName = currency.Name,
                     Pincode = w.Pincode,
                     LastActivity = w.LastActivity,
-                    Type = w.Type
+                    Type = w.Type,
+                    Code = w.Code
                 });
             }
             return walletsRes;
@@ -94,7 +102,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             return new GetWalletDTO {
                 WalletId = w.Id,
                 Amount = w.Amount,
-                //Currency = w.Currency,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
                 Type = w.Type
@@ -133,6 +140,45 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
             var res = await _mediator.Send(request);
             return res.IsSuccessful ? Ok() : BadRequest();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User, Admin")]
+        [Route("transfer")]
+        public async Task<IActionResult> TranserFounds([FromBody] TransferDTO transfer)  
+        {
+            var query = new TransferFoundsCommand()
+            {
+                Amount = transfer.Amount,
+                CodeOfAccepter = transfer.CodeOfAccepter,
+                Description = transfer.Description,
+                CodeOfSender = transfer.CodeOfSender,
+                CurrencyId = transfer.CurrencyId,
+                Date = DateTime.Now
+            };
+            var res = await _mediator.Send(query);
+            
+            
+            return res != null && res.IsSuccessful ? Ok() : BadRequest();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
+        [Route("gettransactions")]
+        public async Task<IActionResult> GetTransactions() 
+        {
+            if(HttpContext != null) 
+            {
+                var query = new GetTransactionsQuery()
+                {
+                    UserId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == Constants.UserIdClaimName).Value),
+                };
+                var res = await _mediator.Send(query);
+                return Ok(res);
+
+            }
+
+            return BadRequest();
         }
     }
 }

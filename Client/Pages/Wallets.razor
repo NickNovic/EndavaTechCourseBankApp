@@ -8,6 +8,7 @@
 <AuthorizeView>
     <Authorized>
         <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="RedirectToCreateWallet">Create Wallet</MudButton>
+        <MudButton Variant=Variant.Outlined Color=Color.Primary OnClick="CreateTransaction">New transaction</MudButton>
     </Authorized>
 </AuthorizeView>
 
@@ -27,9 +28,10 @@ else
             <MudTh>Currency Code</MudTh>
             <MudTh>Change Rate</MudTh>
             <MudTh>Name</MudTh>
+            <MudTh>Wallet Code</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd>@context.Id</MudTd>
+            <MudTd>@context.WalletId</MudTd>
             <MudTd>@context.TimeStamp</MudTd>
             <MudTd>@context.Type</MudTd>
             <MudTd>@context.Amount</MudTd>
@@ -37,6 +39,7 @@ else
             <MudTd>@context.CurrencyCode</MudTd>
             <MudTd>@context.ChangeRate</MudTd>
             <MudTd>@context.CurrencyName</MudTd>
+            <MudTd>@context.Code</MudTd>
         </RowTemplate>
     </MudTable>
 }
@@ -60,5 +63,9 @@ else
     public void RedirectToCreateWallet()
     {
         navManager.NavigateTo("/create-wallet");
+    }
+    public void CreateTransaction()
+    {
+        navManager.NavigateTo("/create-transaction");
     }
 }

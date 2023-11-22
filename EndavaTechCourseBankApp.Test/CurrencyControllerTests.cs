@@ -54,7 +54,7 @@ namespace EndavaTechCourseBankApp.Test
         {
             context.currencies.AddRange(currency1, currency2);
 
-            var currencies = await currencyController.GetCurrencyes();
+            var currencies = await currencyController.GetCurrencies();
 
             currencies.Should().NotBeNull();
         }

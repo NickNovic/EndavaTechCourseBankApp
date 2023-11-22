@@ -10,11 +10,11 @@ namespace EndavaTechCourseBankApp.Domain.Models
     public class Wallet : BaseEntity
     {
         public decimal Amount { get; set; }
-        public Currency Currency { get; set; }
+        public Guid CurrencyId { get; set; }
         public int Pincode { get; set; }
         public string Type { get; set; }
         public DateTime LastActivity { get; set; }
-        public Guid CurrencyId { get; set; }
-        //public decimal ChangeRate { get; set; }
+        public Guid UserId { get; set; }
+        public string Code { get; set; }
     }
 }

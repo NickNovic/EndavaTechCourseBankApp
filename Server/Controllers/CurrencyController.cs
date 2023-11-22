@@ -25,7 +25,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CurrencyDTO>>> GetCurrencyes()
+        public async Task<ActionResult<List<CurrencyDTO>>> GetCurrencies()
         {
             var currencyesRes = new List<CurrencyDTO>();
 
@@ -65,13 +65,20 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<Currency> GetCurrencyById(Guid id)
+        public async Task<CurrencyDTO> GetCurrencyById(Guid id)
         {
             GetCurrencyByIdQuery request = new GetCurrencyByIdQuery
             {
                 Id = id
             };
-            return await mediator.Send(request);
+            var res = await mediator.Send(request);
+            return new CurrencyDTO
+            {
+                Id = res.Id.ToString(),
+                CurrencyCode = res.CurrencyCode,
+                ChangeRate = res.ChangeRate,
+                Name = res.Name
+            };
         }
 
         [HttpPost]

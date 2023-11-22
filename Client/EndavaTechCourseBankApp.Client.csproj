@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <None Include="Pages\Admin\Admin.razor" />
+    <None Include="Pages\CreateTransaction.razor" />
     <None Include="Pages\Login.razor" />
     <None Include="Pages\Register.razor" />
     <None Include="Pages\RowTemplate.razor" />
@@ -37,11 +38,20 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Admin\Admin.razor" />
+    <_ContentIncludedByDefault Remove="Pages\CreateTransaction.razor" />
     <_ContentIncludedByDefault Remove="Pages\RowTemplate.razor" />
   </ItemGroup>
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Pages\Admin\Admin.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\CreateTransaction.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Pages\CreateTransaction.razor" />
   </ItemGroup>
 
 </Project>

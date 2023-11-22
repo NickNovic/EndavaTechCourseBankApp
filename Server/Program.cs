@@ -20,6 +20,7 @@ namespace EndavaTechCourseBankApp.Server
             builder.Services.AddJwtIdentity(configuration);
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            
 
             builder.Services.AddMediatR(config =>
             {
