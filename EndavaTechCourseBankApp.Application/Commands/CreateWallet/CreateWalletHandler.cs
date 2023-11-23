@@ -30,8 +30,6 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
 
             Wallet getWal;
             var rnd = new Random();
-            var walletCode = new WalletCode();
-
             
             string wCode = "";
             do

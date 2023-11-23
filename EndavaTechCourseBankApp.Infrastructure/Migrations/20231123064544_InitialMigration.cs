@@ -34,6 +34,7 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MainWalletId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -227,8 +228,8 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("8b4c9835-e4ac-4d92-85bb-e4ccc3ebd0b2"), null, "User", "USER" },
-                    { new Guid("9670fb95-c6f5-4f27-8455-218e39da1b98"), null, "Admin", "ADMIN" }
+                    { new Guid("3619834b-41a3-40b6-ba89-799c42094ec3"), null, "Admin", "ADMIN" },
+                    { new Guid("c56ad5a3-6d37-421d-bfc2-7d908d6aad6c"), null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231121145314_InitialMigration")]
+    [Migration("20231123064544_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -117,6 +117,9 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("MainWalletId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -224,13 +227,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8b4c9835-e4ac-4d92-85bb-e4ccc3ebd0b2"),
+                            Id = new Guid("c56ad5a3-6d37-421d-bfc2-7d908d6aad6c"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("9670fb95-c6f5-4f27-8455-218e39da1b98"),
+                            Id = new Guid("3619834b-41a3-40b6-ba89-799c42094ec3"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

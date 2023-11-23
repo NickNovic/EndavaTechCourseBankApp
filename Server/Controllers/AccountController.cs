@@ -6,6 +6,9 @@ using EndavaTechCourseBankApp.Shared;
 using MediatR;
 using EndavaTechCourseBankApp.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using EndavaTechCourseBankApp.Application.Queries.GetUserByEmail;
+using EndavaTechCourseBankApp.Application.Commands.UpdateUser;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -42,6 +45,32 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             return result.IsSuccessful ? Ok() : BadRequest(new {result.Error });
         }
 
+        [HttpPost]
+        ////[Authorize(Roles = "User, Admin")]
+        [Route("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDto dto) 
+        {
+            var query = new GetUserByEmailQuery
+            {
+                Email = dto.Email
+            };
+
+            var result = await mediator.Send(query);
+
+            var newUser = new UpdateUserCommand
+            {
+                Email = result.Email,
+                FirstName = result.FirstName,
+                LastName = result.LastName,
+                Username = dto.Username,
+                MainWalletId = dto.MainWalletId,    
+            };
+
+            var updatingResult = await mediator.Send(newUser);
+
+            return updatingResult.IsSuccessful ? Ok() : BadRequest();
+
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)

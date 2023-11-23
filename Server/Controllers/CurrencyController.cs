@@ -67,7 +67,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Route("{id}")]
         public async Task<CurrencyDTO> GetCurrencyById(Guid id)
         {
-            GetCurrencyByIdQuery request = new GetCurrencyByIdQuery
+            GetCurrencyByIdQuery request = new ()
             {
                 Id = id
             };
@@ -86,8 +86,10 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCurrencyById([FromBody]Guid id)
         {
-            DeleteCurrencyByIdCommand request = new DeleteCurrencyByIdCommand { Id = id };
+            DeleteCurrencyByIdCommand request = new() { Id = id };
+
             var res = await mediator.Send(request);
+
             if (res.IsSuccessful && res != null)
                 return Ok();
             return BadRequest();
