@@ -17,7 +17,16 @@ else
         }
     </MudSelect>
     <MudTextField T="decimal" Label="Amount" @bind-Value="Amount"></MudTextField>
-    <MudTextField T="string" Label="Id of Accepter Wallet" @bind-Value="CodeOfAccepter"></MudTextField>
+    <MudText>Send by email</MudText>
+    <MudCheckBox @bind-Checked="IsByEmail"></MudCheckBox>
+    if(IsByEmail)
+    {
+        <MudTextField T="string" Label="Email" @bind-Value="Email"></MudTextField>
+    }else
+    {
+        <MudTextField T="string" Label="Id of Accepter Wallet" @bind-Value="CodeOfAccepter"></MudTextField>
+
+    }
     <MudTextField T="string" Label="Description" @bind-Value="Description"></MudTextField>
     <MudButton OnClick="CreateTranasaction">Create transaction</MudButton>
 
@@ -31,6 +40,8 @@ else
     public List<string> Codes;
     public string SelectedSenderCode;
     public string _selectedSenderCode;
+    public bool IsByEmail = false;
+    public string Email;
 
     public decimal Amount;
     public string CodeOfAccepter;
@@ -40,11 +51,19 @@ else
     public string walletType;
     public decimal walletAmount;
 
+
     protected override async Task OnInitializedAsync()
     {
         await GetWalletsForUser();
         await base.OnInitializedAsync();
     }
+
+    public void SendByEmail()
+    {
+        IsByEmail = true;
+        StateHasChanged();
+    }
+
     public async void SelectWallet(string id)
     {
         SelectedSenderCode = id;
@@ -69,6 +88,16 @@ else
     }
     public async Task CreateTranasaction()
     {
+        if(IsByEmail && !string.IsNullOrEmpty(Email))
+        {
+            var user = await httpClient.GetFromJsonAsync<UserDto>("api/account/" + Email);
+            var wallet = await httpClient.GetFromJsonAsync<GetWalletDTO>("api/wallet/" + user.MainWalletId.ToString());
+            CodeOfAccepter = wallet.Code;
+        }
+        else{
+            IsByEmail = false;
+        }
+
         var trs = new TransferDTO
         {
             Amount = this.Amount,

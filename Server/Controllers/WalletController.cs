@@ -89,8 +89,8 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             return walletsRes;
         }
 
-        [HttpGet("{id}")]
-        [Route("getWalletById")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<GetWalletDTO> GetWalletById(Guid id)
         {
             GetWalletByIdQuery query = new GetWalletByIdQuery 
@@ -104,9 +104,11 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 Amount = w.Amount,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
-                Type = w.Type
+                Type = w.Type,
+                Code = w.Code
             };
         }
+
         [HttpPost]
         [Route("{id}")]
         public async Task<IActionResult> DeleteWalletById(Guid id)
@@ -157,7 +159,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 Date = DateTime.Now
             };
             var res = await _mediator.Send(query);
-            
             
             return res != null && res.IsSuccessful ? Ok() : BadRequest();
         }

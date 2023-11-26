@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231123064544_InitialMigration")]
+    [Migration("20231123183305_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -227,13 +227,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c56ad5a3-6d37-421d-bfc2-7d908d6aad6c"),
+                            Id = new Guid("d38a7737-08af-4f8f-9273-7b24c54f5075"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("3619834b-41a3-40b6-ba89-799c42094ec3"),
+                            Id = new Guid("d44f9940-0b27-4b81-bff5-99bf1976ac11"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

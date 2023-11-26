@@ -60,12 +60,10 @@
             FirstName = newUser.FirstName,
             LastName = newUser.LastName,
             Username = newUser.Username,
-            MainWalletId = resultWallet.Id
+            MainWalletId = resultWallet.WalletId
         };
 
         await httpClient.PostAsJsonAsync("api/account/update", dto);
-
-
 
         newUser = new();
         navManager.NavigateTo("");
