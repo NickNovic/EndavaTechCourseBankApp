@@ -25,9 +25,8 @@ namespace EndavaTechCourseBankApp.Application.Commands.UpdateUser
             var user = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
             
             if(user is null)
-            {
-                return new CommandStatus { IsSuccessful = false };
-            }
+                return CommandStatus.Failed("no such user");
+            
 
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
@@ -38,7 +37,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.UpdateUser
             context.Users.Update(user);
             context.SaveChanges();
 
-            return new CommandStatus { IsSuccessful = true };
+            return new CommandStatus();
         }
     }
 }

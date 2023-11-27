@@ -49,11 +49,11 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
 
             if(accepterCurrency == transferCurrency) 
             {
-                accepter.Amount -= request.Amount;
+                accepter.Amount += request.Amount;
             }
             else
             {
-                accepter.Amount = accepter.Amount - (request.Amount * transferCurrency.ChangeRate);
+                accepter.Amount = accepter.Amount + (request.Amount * transferCurrency.ChangeRate);
             }
                         
             context.wallets.Update(sender);

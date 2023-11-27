@@ -12,17 +12,19 @@ namespace EndavaTechCourseBankApp.Application.Queries.GetUserByEmail
 {
     public class GetUserByEmailHandler : IRequestHandler<GetUserByEmailQuery, User>
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public GetUserByEmailHandler(ApplicationDbContext context)
         {
             ArgumentNullException.ThrowIfNull(context);
-            this.context = context;
+            _context = context;
         }
 
         public async Task<User> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
+            if (user is null)
+                return new User();
 
             return user;
         }
