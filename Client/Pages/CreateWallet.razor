@@ -6,8 +6,8 @@
 <br />
 <br />
 <MudText>New Wallet: </MudText>
-<MudSelect T="string" Items="@walletTypes" For="@(()=>walletType)" ValueChanged="((string type) => SelectType(type))">
-    @foreach(string s in walletTypes)
+<MudSelect T="string" Items="@stringWalletTypes" For="@(()=>walletType)" ValueChanged="((string type) => SelectType(type))">
+    @foreach(string s in stringWalletTypes)
     {
         <MudSelectItem T="string" Value="@s">@s</MudSelectItem>
     }
@@ -25,7 +25,8 @@
 
 @code {
     private CreateWalletDTO wallet = new();
-    private List<string> walletTypes = new();
+    private List<WalletCommisionDto> walletTypes = new();
+    private List<string> stringWalletTypes = new();
     private string errorMessage;
     public string walletType;
 
@@ -37,7 +38,11 @@
 
     public async Task GetWalletTypes()
     {
-        walletTypes = await httpClient.GetFromJsonAsync<List<string>>("api/wallet/getWalletTypes");
+        walletTypes = await httpClient.GetFromJsonAsync<List<WalletCommisionDto>>("api/wallet/getWalletTypes");
+        foreach(var t in walletTypes)
+        {
+            stringWalletTypes.Add(Enum.GetName(t.Type));
+        }
         StateHasChanged();
     }
 
