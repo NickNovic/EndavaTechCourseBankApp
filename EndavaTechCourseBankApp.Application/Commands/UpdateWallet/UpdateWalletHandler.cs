@@ -1,4 +1,5 @@
-﻿using EndavaTechCourseBankApp.Domain.Models;
+﻿using EndavaTechCourseBankApp.Domain.Enums;
+using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using MediatR;
 using System;
@@ -29,7 +30,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.UpdateWallet
             wallet.Pincode = request.Pincode;
             wallet.CurrencyId = request.CurrencyId;
             wallet.LastActivity = request.LastActivity;
-            wallet.Type = request.Type;
+            wallet.Type = (WalletType)Enum.Parse(typeof(WalletType), request.Type);
            
 
             var res = context.wallets.Update(wallet);

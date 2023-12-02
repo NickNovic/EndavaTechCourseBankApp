@@ -6,7 +6,13 @@
 <br />
 <br />
 <MudText>New Wallet: </MudText>
-<MudTextField T="string" @bind-Value="wallet.Type" Label="Type" />
+<MudSelect T="string" Items="@walletTypes" For="@(()=>walletType)" ValueChanged="((string type) => SelectType(type))">
+    @foreach(string s in walletTypes)
+    {
+        <MudSelectItem T="string" Value="@s">@s</MudSelectItem>
+    }
+</MudSelect>
+
 <MudTextField T="decimal" @bind-Value="wallet.Amount" Label="Amount" />
 <MudTextField T="string" @bind-Value="wallet.CurrencyCode" Label="Currency code"/>
 
@@ -18,9 +24,27 @@
 }
 
 @code {
-    private CreateWalletDTO wallet = new CreateWalletDTO();
-
+    private CreateWalletDTO wallet = new();
+    private List<string> walletTypes = new();
     private string errorMessage;
+    public string walletType;
+
+    protected override async void OnInitialized()
+    {
+        await GetWalletTypes();
+        base.OnInitialized();
+    }
+
+    public async Task GetWalletTypes()
+    {
+        walletTypes = await httpClient.GetFromJsonAsync<List<string>>("api/wallet/getWalletTypes");
+        StateHasChanged();
+    }
+
+    public void SelectType(string type)
+    {
+        wallet.Type = type;
+    }
 
     public async Task AddWallet()
     {

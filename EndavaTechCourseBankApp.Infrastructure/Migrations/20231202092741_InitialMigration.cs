@@ -56,6 +56,19 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "commisions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Percent = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_commisions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "currencies",
                 columns: table => new
                 {
@@ -207,7 +220,7 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CurrencyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Pincode = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     LastActivity = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -228,8 +241,8 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("d38a7737-08af-4f8f-9273-7b24c54f5075"), null, "User", "USER" },
-                    { new Guid("d44f9940-0b27-4b81-bff5-99bf1976ac11"), null, "Admin", "ADMIN" }
+                    { new Guid("41f5ef05-c4fb-4b0d-9cd8-0084682218e4"), null, "Admin", "ADMIN" },
+                    { new Guid("6ca282fa-e784-42b9-9ae1-33b185c5f5a5"), null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -299,6 +312,9 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "commisions");
 
             migrationBuilder.DropTable(
                 name: "transactions");

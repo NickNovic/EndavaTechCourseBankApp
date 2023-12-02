@@ -17,6 +17,8 @@ using EndavaTechCourseBankApp.Application.Commands.TransferFounds;
 using System.Diagnostics;
 using EndavaTechCourseBankApp.Application.Queries.GetTransactions;
 using Microsoft.IdentityModel.Tokens;
+using EndavaTechCourseBankApp.Application.Queries.GetWalletTypes;
+using EndavaTechCourseBankApp.Application.Commands.ChangeWalletTypePercent;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -82,7 +84,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                     CurrencyName = currency.Name,
                     Pincode = w.Pincode,
                     LastActivity = w.LastActivity,
-                    Type = w.Type,
+                    Type = Enum.GetName(w.Type),
                     Code = w.Code
                 });
             }
@@ -104,7 +106,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 Amount = w.Amount,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
-                Type = w.Type,
+                Type = Enum.GetName(w.Type),
                 Code = w.Code
             };
         }
@@ -178,6 +180,39 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 return Ok(res);
 
             }
+
+            return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("getWalletTypes")]
+        public async Task<ActionResult> GetWalletTypes() 
+        {
+            var request = new GetWalletTypesQuery();
+            var result = await _mediator.Send(request);
+
+            if(result is null) 
+            {
+                return BadRequest();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("changeTypePercent")]
+        public async Task<IActionResult> ChangeWalletTypePercent([FromBody]WalletCommisionDto dto)
+        {
+            var request = new ChangeWalletTypePercentCommand()
+            {
+                TypeName = Enum.GetName(dto.Type),
+                Percent = dto.Percent
+            };
+
+            var result = await _mediator.Send(request);
+
+            if (result.IsSuccessful)
+                return Ok();
 
             return BadRequest();
         }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using EndavaTechCourseBankApp.Infrastructure.Новая_папка;
 using Microsoft.Identity.Client;
+using EndavaTechCourseBankApp.Domain.Enums;
 
 namespace EndavaTechCourseBankApp.Infrastructure.Persistence
 {
@@ -17,6 +18,7 @@ namespace EndavaTechCourseBankApp.Infrastructure.Persistence
         public DbSet<Wallet> wallets { get; set; }
         public DbSet<Currency> currencies { get; set; }
         public DbSet<Transaction> transactions { get; set; } 
+        public DbSet<Commision> commisions { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -27,17 +29,9 @@ namespace EndavaTechCourseBankApp.Infrastructure.Persistence
         {
             modelBuilder.Entity<Wallet>().HasKey(w  => w.Id);
             modelBuilder.Entity<Transaction>().HasKey(w => w.Id);
-            
+            modelBuilder.Entity<Commision>().HasKey(w => w.Id);
 
             modelBuilder.Entity<Currency>().HasKey(w => w.Id);
-            
-            /*
-            modelBuilder.Entity<Currency>()
-                .HasMany(e => e.Wallets)
-                .WithOne(e => e.Currency)
-                .HasForeignKey(e => e.CurrencyId)
-                .IsRequired();
-            */
             modelBuilder.ApplyConfiguration(new RoleConfigurations());
             
             base.OnModelCreating(modelBuilder);

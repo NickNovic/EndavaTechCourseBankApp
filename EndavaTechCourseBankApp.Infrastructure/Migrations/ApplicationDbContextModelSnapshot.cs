@@ -22,6 +22,23 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Commision", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Percent")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("commisions");
+                });
+
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Currency", b =>
                 {
                     b.Property<Guid>("Id")
@@ -180,9 +197,8 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<int>("Pincode")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -224,13 +240,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d38a7737-08af-4f8f-9273-7b24c54f5075"),
+                            Id = new Guid("6ca282fa-e784-42b9-9ae1-33b185c5f5a5"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("d44f9940-0b27-4b81-bff5-99bf1976ac11"),
+                            Id = new Guid("41f5ef05-c4fb-4b0d-9cd8-0084682218e4"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

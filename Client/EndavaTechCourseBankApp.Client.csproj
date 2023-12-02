@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <None Include="Pages\Admin\Admin.razor" />
+    <None Include="Pages\Admin\WalletTypes.razor" />
     <None Include="Pages\CreateTransaction.razor" />
     <None Include="Pages\Login.razor" />
     <None Include="Pages\Register.razor" />
@@ -38,6 +39,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Admin\Admin.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\WalletTypes.razor" />
     <_ContentIncludedByDefault Remove="Pages\CreateTransaction.razor" />
     <_ContentIncludedByDefault Remove="Pages\RowTemplate.razor" />
   </ItemGroup>
@@ -51,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Watch Remove="Pages\Admin\WalletTypes.razor" />
     <Watch Remove="Pages\CreateTransaction.razor" />
   </ItemGroup>
 

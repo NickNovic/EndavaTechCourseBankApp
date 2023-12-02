@@ -1,0 +1,45 @@
+﻿@page "/wallettypes"
+@layout AdminLayout
+@inject HttpClient httpClient
+
+<h3>WalletTypes</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <MudList>
+            @foreach(var t in Types)
+            {
+                <MudListItem>
+                    @t.Type
+                    <MudInput T="float" Label="percent" @bind-Value="@t.Percent" this.Value="@Math.Round(t.Percent)"></MudInput>
+                </MudListItem>
+            }
+        </MudList>
+        <MudButton OnClick="Save">Save</MudButton>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private List<WalletCommisionDto> Types = new();
+
+    protected override void OnInitialized()
+    {
+        GetTypes();
+
+        base.OnInitialized();
+    }
+
+    public async Task GetTypes()
+    {
+        Types = await httpClient.GetFromJsonAsync<List<WalletCommisionDto>>("api/wallet/getWalletTypes");
+        StateHasChanged();
+    }
+
+    public async void Save()
+    {
+        foreach(var t in Types)
+        {
+            await httpClient.PostAsJsonAsync("api/wallet/changeTypePercent", t);
+        }
+    }
+}

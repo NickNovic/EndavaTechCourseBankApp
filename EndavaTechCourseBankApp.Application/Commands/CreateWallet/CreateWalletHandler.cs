@@ -1,4 +1,5 @@
-﻿using EndavaTechCourseBankApp.Domain.Models;
+﻿using EndavaTechCourseBankApp.Domain.Enums;
+using EndavaTechCourseBankApp.Domain.Models;
 using EndavaTechCourseBankApp.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -41,10 +42,18 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
                 }
             } while (context.wallets.FirstOrDefault(w => w.Code == wCode) != null);
 
+            var type = context.commisions
+                .FirstOrDefault(c => c.Type == (WalletType)Enum.Parse(typeof(WalletType), request.Type));
+
+            if(type is null) 
+            {
+                return CommandStatus.Failed("we have no such wallet type");
+            }
+
             var wallet = new Wallet
             {
                 UserId = request.UserId,
-                Type = request.Type,
+                Type = type.Type,
                 Amount = request.Amount,
                 CurrencyId = currency.Id,
                 Code = wCode                
