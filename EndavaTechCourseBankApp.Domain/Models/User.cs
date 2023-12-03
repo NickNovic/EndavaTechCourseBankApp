@@ -12,5 +12,6 @@ namespace EndavaTechCourseBankApp.Domain.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Guid MainWalletId { get; set; }
+        public List<FavoriteWalletCode> Favorites { get; set; }
     }
 }

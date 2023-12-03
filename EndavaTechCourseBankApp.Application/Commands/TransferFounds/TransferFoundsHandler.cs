@@ -53,6 +53,11 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
                 sender.Amount -= (decimal)((float)request.Amount * (1 + commision) * (float)transferCurrency.ChangeRate);
             }
 
+            if(sender.Amount < 0)
+            {
+                return CommandStatus.Failed("Not enought money");
+            }
+
             if(accepterCurrency == transferCurrency) 
             {
                 accepter.Amount += request.Amount;

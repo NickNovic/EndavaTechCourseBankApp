@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231202092741_InitialMigration")]
+    [Migration("20231203124556_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -62,6 +62,26 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("currencies");
+                });
+
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.FavoriteWalletCode", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("WalletCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("favorites");
                 });
 
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Transaction", b =>
@@ -243,13 +263,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6ca282fa-e784-42b9-9ae1-33b185c5f5a5"),
+                            Id = new Guid("bf73178d-eba7-4a95-8453-1ba4e59112c1"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("41f5ef05-c4fb-4b0d-9cd8-0084682218e4"),
+                            Id = new Guid("9c1f50b2-c1aa-449b-849d-725224347a1b"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -358,6 +378,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.FavoriteWalletCode", b =>
+                {
+                    b.HasOne("EndavaTechCourseBankApp.Domain.Models.User", null)
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Transaction", b =>
                 {
                     b.HasOne("EndavaTechCourseBankApp.Domain.Models.Currency", "Currency")
@@ -432,6 +459,11 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Currency", b =>
                 {
                     b.Navigation("Wallets");
+                });
+
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.User", b =>
+                {
+                    b.Navigation("Favorites");
                 });
 #pragma warning restore 612, 618
         }

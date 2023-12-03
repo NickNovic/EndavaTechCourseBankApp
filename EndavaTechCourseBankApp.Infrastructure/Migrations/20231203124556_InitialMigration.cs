@@ -189,6 +189,24 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "favorites",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WalletCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_favorites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_favorites_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "transactions",
                 columns: table => new
                 {
@@ -241,8 +259,8 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("41f5ef05-c4fb-4b0d-9cd8-0084682218e4"), null, "Admin", "ADMIN" },
-                    { new Guid("6ca282fa-e784-42b9-9ae1-33b185c5f5a5"), null, "User", "USER" }
+                    { new Guid("9c1f50b2-c1aa-449b-849d-725224347a1b"), null, "Admin", "ADMIN" },
+                    { new Guid("bf73178d-eba7-4a95-8453-1ba4e59112c1"), null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -285,6 +303,11 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_favorites_UserId",
+                table: "favorites",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_transactions_CurrencyId",
                 table: "transactions",
                 column: "CurrencyId");
@@ -315,6 +338,9 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "commisions");
+
+            migrationBuilder.DropTable(
+                name: "favorites");
 
             migrationBuilder.DropTable(
                 name: "transactions");

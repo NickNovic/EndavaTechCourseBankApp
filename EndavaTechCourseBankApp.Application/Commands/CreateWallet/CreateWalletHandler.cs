@@ -29,7 +29,6 @@ namespace EndavaTechCourseBankApp.Application.Commands.CreateWallet
                 return new CommandStatus { IsSuccessful = false, Error = "Currency does not exists" };
             }
 
-            Wallet getWal;
             var rnd = new Random();
             
             string wCode = "";

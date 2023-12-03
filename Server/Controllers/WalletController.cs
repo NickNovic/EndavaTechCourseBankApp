@@ -19,6 +19,9 @@ using EndavaTechCourseBankApp.Application.Queries.GetTransactions;
 using Microsoft.IdentityModel.Tokens;
 using EndavaTechCourseBankApp.Application.Queries.GetWalletTypes;
 using EndavaTechCourseBankApp.Application.Commands.ChangeWalletTypePercent;
+using EndavaTechCourseBankApp.Application.Commands.AddToFavorites;
+using EndavaTechCourseBankApp.Application.Queries.GetFavorites;
+using EndavaTechCourseBankApp.Application.Commands.RemoveCodeFromFavorites;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -215,6 +218,60 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 return Ok();
 
             return BadRequest();
+        }
+
+
+        [HttpPost]
+        [Route("addToFavorites")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<ActionResult> AddToFavorites([FromBody] FavoritesDto dto) 
+        {
+            var userId = this.HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value;
+
+            var request = new AddToFavoritesCommand()
+            {
+                UserId = Guid.Parse(userId),
+                WalletCode = dto.WalletCode
+            };
+
+            var result = await this._mediator.Send(request);
+
+            return result.IsSuccessful ? Ok() : BadRequest();
+        }
+
+        [HttpGet]
+        [Route("getFavorites")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<ActionResult> GetFavorites()
+        {
+            var userId = this.HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value;
+
+            var request = new GetFavoritesQuery()
+            {
+                UserId = Guid.Parse(userId)
+            };
+
+            var result = await _mediator.Send(request);
+
+            return result is not null ? Ok(result) : BadRequest();
+        }
+
+        [HttpPost]
+        [Route("removeFromFavorites")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<ActionResult> RemoveFromFavorites([FromBody] FavoritesDto dto) 
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value;
+
+            var request = new RemoveCodeFromFavoritesCommand()
+            {
+                UserId = userId,
+                WalletCode = dto.WalletCode
+            };
+
+            var result = await _mediator.Send(request);
+
+            return result.IsSuccessful ? Ok() : BadRequest();
         }
     }
 }

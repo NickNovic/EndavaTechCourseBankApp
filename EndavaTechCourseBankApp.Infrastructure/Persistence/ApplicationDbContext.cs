@@ -19,14 +19,17 @@ namespace EndavaTechCourseBankApp.Infrastructure.Persistence
         public DbSet<Currency> currencies { get; set; }
         public DbSet<Transaction> transactions { get; set; } 
         public DbSet<Commision> commisions { get; set; }
-
+        public DbSet<FavoriteWalletCode> favorites { get; set; }
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
+            modelBuilder.Entity<FavoriteWalletCode>().HasKey(w => w.Id);
+
             modelBuilder.Entity<Wallet>().HasKey(w  => w.Id);
             modelBuilder.Entity<Transaction>().HasKey(w => w.Id);
             modelBuilder.Entity<Commision>().HasKey(w => w.Id);

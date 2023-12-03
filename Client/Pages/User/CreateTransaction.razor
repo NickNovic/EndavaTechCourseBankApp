@@ -25,8 +25,7 @@ else
         <MudTextField T="string" Label="Email" @bind-Value="Email"></MudTextField>
     }else
     {
-        <MudTextField T="string" Label="Id of Accepter Wallet" @bind-Value="CodeOfAccepter"></MudTextField>
-
+        <MudAutocomplete T="string" SearchFunc="GetMyAndFavorites" @bind-Value="CodeOfAccepter"/>
     }
     <MudTextField T="string" Label="Description" @bind-Value="Description"></MudTextField>
     <MudButton OnClick="CreateTranasaction">Create transaction</MudButton>
@@ -43,6 +42,7 @@ else
     public string _selectedSenderCode;
     public bool IsByEmail = false;
     public string Email;
+    public List<string> favoriteCodes = new();
 
     public decimal Amount;
     public string CodeOfAccepter;
@@ -56,6 +56,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         await GetWalletsForUser();
+
         await base.OnInitializedAsync();
     }
 
@@ -87,6 +88,7 @@ else
             Codes.Add(w.Code);
         }
     }
+
     public async Task CreateTranasaction()
     {
         if(IsByEmail && !string.IsNullOrEmpty(Email))
@@ -109,5 +111,21 @@ else
         };
 
         var res = await this.httpClient.PostAsJsonAsync("api/wallet/transfer", trs);
+    }
+
+    public async Task<IEnumerable<string>> GetMyAndFavorites(string value)
+    {
+        favoriteCodes = new List<string>();
+        var myWallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+
+        foreach (var w in myWallets)
+        {
+            favoriteCodes.Add(w.Code);
+        }
+
+        var favorites = await httpClient.GetFromJsonAsync<List<string>>("api/wallet/getFavorites");
+        favoriteCodes.AddRange(favorites);
+
+        return favoriteCodes;
     }
 }
