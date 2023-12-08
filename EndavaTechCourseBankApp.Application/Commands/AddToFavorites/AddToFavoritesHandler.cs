@@ -16,6 +16,7 @@ namespace EndavaTechCourseBankApp.Application.Commands.AddToFavorites
 
         public AddToFavoritesHandler(ApplicationDbContext context)
         {
+            ArgumentNullException.ThrowIfNull(context);
             _context = context;
         }
 
