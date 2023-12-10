@@ -40,7 +40,8 @@ namespace EndavaTechCourseBankApp.Application.Commands.RegisterUser
                 UserName = request.Username,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email
+                Email = request.Email,
+                Favorites = new List<FavoriteWalletCode>()
             };
 
             var createResult = await userManager.CreateAsync(user, request.Password);

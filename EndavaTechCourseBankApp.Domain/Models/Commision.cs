@@ -8,14 +8,9 @@ using System.Threading.Tasks;
 
 namespace EndavaTechCourseBankApp.Domain.Models
 {
-    public class Wallet : BaseEntity
+    public class Commision : BaseEntity
     {
-        public decimal Amount { get; set; }
-        public Guid CurrencyId { get; set; }
-        public int Pincode { get; set; }
         public WalletType Type { get; set; }
-        public DateTime LastActivity { get; set; }
-        public Guid UserId { get; set; }
-        public string Code { get; set; }
+        public float Percent {  get; set; }
     }
 }

@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EndavaTechCourseBankApp.Shared
+{
+    public class WalletCommisionDto
+    {
+        public WalletTypeDto Type { get; set; }
+        public float Percent { get; set; }
+    }
+}

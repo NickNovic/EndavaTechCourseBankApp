@@ -22,6 +22,23 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Commision", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Percent")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("commisions");
+                });
+
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Currency", b =>
                 {
                     b.Property<Guid>("Id")
@@ -42,6 +59,26 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("currencies");
+                });
+
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.FavoriteWalletCode", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("WalletCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("favorites");
                 });
 
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Transaction", b =>
@@ -115,6 +152,9 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<Guid>("MainWalletId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -177,9 +217,8 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.Property<int>("Pincode")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -221,13 +260,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8b4c9835-e4ac-4d92-85bb-e4ccc3ebd0b2"),
+                            Id = new Guid("bf73178d-eba7-4a95-8453-1ba4e59112c1"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("9670fb95-c6f5-4f27-8455-218e39da1b98"),
+                            Id = new Guid("9c1f50b2-c1aa-449b-849d-725224347a1b"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -336,6 +375,13 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.FavoriteWalletCode", b =>
+                {
+                    b.HasOne("EndavaTechCourseBankApp.Domain.Models.User", null)
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Transaction", b =>
                 {
                     b.HasOne("EndavaTechCourseBankApp.Domain.Models.Currency", "Currency")
@@ -410,6 +456,11 @@ namespace EndavaTechCourseBankApp.Infrastructure.Migrations
             modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.Currency", b =>
                 {
                     b.Navigation("Wallets");
+                });
+
+            modelBuilder.Entity("EndavaTechCourseBankApp.Domain.Models.User", b =>
+                {
+                    b.Navigation("Favorites");
                 });
 #pragma warning restore 612, 618
         }

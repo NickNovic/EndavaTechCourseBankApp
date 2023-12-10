@@ -1,0 +1,71 @@
+﻿@page "/add-to-favorites"
+@layout UserLayout
+@inject HttpClient httpClient;
+
+<h3>AddToFavorites</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <MudInput @bind-Value="@favoriteWalletCode"></MudInput>
+        <MudButton OnClick="AddCodeToFavorites">Add New</MudButton>
+        <MudSpacer />
+        <MudList Items="@Favorites">
+            @foreach(var f in Favorites)
+            {
+                <MudListItem>
+                    <MudText>@f</MudText>
+                    <MudButton OnClick="@(() => RemoveFromFavorites(f))">Remove</MudButton>
+                </MudListItem>
+            }
+        </MudList>
+        
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    public List<string> Favorites = new();
+    public string favoriteWalletCode = "";
+
+    protected override async void OnInitialized()
+    {
+        await GetFavorites();
+
+        base.OnInitialized();
+    }
+
+    public async Task GetFavorites()
+    {
+        Favorites = await httpClient.GetFromJsonAsync<List<string>>("api/wallet/getFavorites");
+        StateHasChanged();
+    }
+
+    public async Task AddCodeToFavorites()
+    {
+        var walletCode = new FavoritesDto()
+        {
+            WalletCode = favoriteWalletCode    
+        };
+
+        var result = await httpClient.PostAsJsonAsync("api/wallet/addToFavorites", walletCode);
+
+        if(result.IsSuccessStatusCode)
+            Favorites.Add(favoriteWalletCode);
+        
+        StateHasChanged();
+    }
+
+    public async Task RemoveFromFavorites(string walletCode)
+    {
+        var dto = new FavoritesDto()
+        {
+            WalletCode = walletCode
+        };
+
+        var result = await httpClient.PostAsJsonAsync("api/wallet/removeFromFavorites", dto);
+       
+        if(result.IsSuccessStatusCode)
+            Favorites.Remove(walletCode);
+        
+        StateHasChanged();
+    }
+}

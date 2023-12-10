@@ -1,6 +1,7 @@
 ﻿@page "/create-transaction"
 @inject NavigationManager navManager;
 @inject HttpClient httpClient;
+@layout UserLayout
 
 <h3>Create Transaction</h3>
 
@@ -17,7 +18,15 @@ else
         }
     </MudSelect>
     <MudTextField T="decimal" Label="Amount" @bind-Value="Amount"></MudTextField>
-    <MudTextField T="string" Label="Id of Accepter Wallet" @bind-Value="CodeOfAccepter"></MudTextField>
+    <MudText>Send by email</MudText>
+    <MudCheckBox @bind-Checked="IsByEmail"></MudCheckBox>
+    if(IsByEmail)
+    {
+        <MudTextField T="string" Label="Email" @bind-Value="Email"></MudTextField>
+    }else
+    {
+        <MudAutocomplete T="string" SearchFunc="GetMyAndFavorites" @bind-Value="CodeOfAccepter"/>
+    }
     <MudTextField T="string" Label="Description" @bind-Value="Description"></MudTextField>
     <MudButton OnClick="CreateTranasaction">Create transaction</MudButton>
 
@@ -31,6 +40,9 @@ else
     public List<string> Codes;
     public string SelectedSenderCode;
     public string _selectedSenderCode;
+    public bool IsByEmail = false;
+    public string Email;
+    public List<string> favoriteCodes = new();
 
     public decimal Amount;
     public string CodeOfAccepter;
@@ -40,11 +52,20 @@ else
     public string walletType;
     public decimal walletAmount;
 
+
     protected override async Task OnInitializedAsync()
     {
         await GetWalletsForUser();
+
         await base.OnInitializedAsync();
     }
+
+    public void SendByEmail()
+    {
+        IsByEmail = true;
+        StateHasChanged();
+    }
+
     public async void SelectWallet(string id)
     {
         SelectedSenderCode = id;
@@ -67,8 +88,19 @@ else
             Codes.Add(w.Code);
         }
     }
+
     public async Task CreateTranasaction()
     {
+        if(IsByEmail && !string.IsNullOrEmpty(Email))
+        {
+            var user = await httpClient.GetFromJsonAsync<UserDto>("api/account/" + Email);
+            var wallet = await httpClient.GetFromJsonAsync<GetWalletDTO>("api/wallet/" + user.MainWalletId.ToString());
+            CodeOfAccepter = wallet.Code;
+        }
+        else{
+            IsByEmail = false;
+        }
+
         var trs = new TransferDTO
         {
             Amount = this.Amount,
@@ -79,5 +111,21 @@ else
         };
 
         var res = await this.httpClient.PostAsJsonAsync("api/wallet/transfer", trs);
+    }
+
+    public async Task<IEnumerable<string>> GetMyAndFavorites(string value)
+    {
+        favoriteCodes = new List<string>();
+        var myWallets = await this.httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+
+        foreach (var w in myWallets)
+        {
+            favoriteCodes.Add(w.Code);
+        }
+
+        var favorites = await httpClient.GetFromJsonAsync<List<string>>("api/wallet/getFavorites");
+        favoriteCodes.AddRange(favorites);
+
+        return favoriteCodes;
     }
 }

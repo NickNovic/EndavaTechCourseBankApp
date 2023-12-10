@@ -17,6 +17,11 @@ using EndavaTechCourseBankApp.Application.Commands.TransferFounds;
 using System.Diagnostics;
 using EndavaTechCourseBankApp.Application.Queries.GetTransactions;
 using Microsoft.IdentityModel.Tokens;
+using EndavaTechCourseBankApp.Application.Queries.GetWalletTypes;
+using EndavaTechCourseBankApp.Application.Commands.ChangeWalletTypePercent;
+using EndavaTechCourseBankApp.Application.Commands.AddToFavorites;
+using EndavaTechCourseBankApp.Application.Queries.GetFavorites;
+using EndavaTechCourseBankApp.Application.Commands.RemoveCodeFromFavorites;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -82,15 +87,15 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                     CurrencyName = currency.Name,
                     Pincode = w.Pincode,
                     LastActivity = w.LastActivity,
-                    Type = w.Type,
+                    Type = Enum.GetName(w.Type),
                     Code = w.Code
                 });
             }
             return walletsRes;
         }
 
-        [HttpGet("{id}")]
-        [Route("getWalletById")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<GetWalletDTO> GetWalletById(Guid id)
         {
             GetWalletByIdQuery query = new GetWalletByIdQuery 
@@ -104,9 +109,11 @@ namespace EndavaTechCourseBankApp.Server.Controllers
                 Amount = w.Amount,
                 Pincode = w.Pincode,
                 LastActivity = w.LastActivity,
-                Type = w.Type
+                Type = Enum.GetName(w.Type),
+                Code = w.Code
             };
         }
+
         [HttpPost]
         [Route("{id}")]
         public async Task<IActionResult> DeleteWalletById(Guid id)
@@ -158,7 +165,6 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             };
             var res = await _mediator.Send(query);
             
-            
             return res != null && res.IsSuccessful ? Ok() : BadRequest();
         }
 
@@ -179,6 +185,93 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("getWalletTypes")]
+        public async Task<ActionResult> GetWalletTypes() 
+        {
+            var request = new GetWalletTypesQuery();
+            var result = await _mediator.Send(request);
+
+            if(result is null) 
+            {
+                return BadRequest();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("changeTypePercent")]
+        public async Task<IActionResult> ChangeWalletTypePercent([FromBody]WalletCommisionDto dto)
+        {
+            var request = new ChangeWalletTypePercentCommand()
+            {
+                TypeName = Enum.GetName(dto.Type),
+                Percent = dto.Percent
+            };
+
+            var result = await _mediator.Send(request);
+
+            if (result.IsSuccessful)
+                return Ok();
+
+            return BadRequest();
+        }
+
+
+        [HttpPost]
+        [Route("addToFavorites")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<ActionResult> AddToFavorites([FromBody] FavoritesDto dto) 
+        {
+            var userId = this.HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value;
+
+            var request = new AddToFavoritesCommand()
+            {
+                UserId = Guid.Parse(userId),
+                WalletCode = dto.WalletCode
+            };
+
+            var result = await this._mediator.Send(request);
+
+            return result.IsSuccessful ? Ok() : BadRequest();
+        }
+
+        [HttpGet]
+        [Route("getFavorites")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<ActionResult> GetFavorites()
+        {
+            var userId = this.HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value;
+
+            var request = new GetFavoritesQuery()
+            {
+                UserId = Guid.Parse(userId)
+            };
+
+            var result = await _mediator.Send(request);
+
+            return result is not null ? Ok(result) : BadRequest();
+        }
+
+        [HttpPost]
+        [Route("removeFromFavorites")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<ActionResult> RemoveFromFavorites([FromBody] FavoritesDto dto) 
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == Constants.UserIdClaimName).Value;
+
+            var request = new RemoveCodeFromFavoritesCommand()
+            {
+                UserId = userId,
+                WalletCode = dto.WalletCode
+            };
+
+            var result = await _mediator.Send(request);
+
+            return result.IsSuccessful ? Ok() : BadRequest();
         }
     }
 }

@@ -6,6 +6,10 @@ using EndavaTechCourseBankApp.Shared;
 using MediatR;
 using EndavaTechCourseBankApp.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using EndavaTechCourseBankApp.Application.Queries.GetUserByEmail;
+using EndavaTechCourseBankApp.Application.Commands.UpdateUser;
+using EndavaTechCourseBankApp.Domain.Models;
 
 namespace EndavaTechCourseBankApp.Server.Controllers
 {
@@ -16,7 +20,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
         private readonly IMediator mediator;
         private readonly JwtService jwtService;
 
-        public AccountController(IMediator mediator, JwtService jwtService) 
+        public AccountController(IMediator mediator, JwtService jwtService)
         {
             ArgumentNullException.ThrowIfNull(mediator);
             ArgumentNullException.ThrowIfNull(jwtService);
@@ -26,7 +30,7 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO register) 
+        public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
             var registerUserCommand = new RegisterUserCommand()
             {
@@ -39,9 +43,35 @@ namespace EndavaTechCourseBankApp.Server.Controllers
 
             var result = await mediator.Send(registerUserCommand);
 
-            return result.IsSuccessful ? Ok() : BadRequest(new {result.Error });
+            return result.IsSuccessful ? Ok() : BadRequest(new { result.Error });
         }
 
+        [HttpPost]
+        [Authorize(Roles = "User, Admin")]
+        [Route("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDto dto)
+        {
+            var query = new GetUserByEmailQuery
+            {
+                Email = dto.Email
+            };
+
+            var result = await mediator.Send(query);
+
+            var newUser = new UpdateUserCommand
+            {
+                Email = result.Email,
+                FirstName = result.FirstName,
+                LastName = result.LastName,
+                Username = dto.Username,
+                MainWalletId = dto.MainWalletId,
+            };
+
+            var updatingResult = await mediator.Send(newUser);
+
+            return updatingResult.IsSuccessful ? Ok() : BadRequest();
+
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)
@@ -72,6 +102,25 @@ namespace EndavaTechCourseBankApp.Server.Controllers
             });
 
             return Ok(jwtToken);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
+        [Route("{email}")]
+        public async Task<IActionResult> GetUserByEmail(string email) 
+        {
+            var query = new GetUserByEmailQuery 
+            { 
+                Email = email 
+            };
+            var result = await mediator.Send(query);
+            
+            if(result is not null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
         }
     }
 }

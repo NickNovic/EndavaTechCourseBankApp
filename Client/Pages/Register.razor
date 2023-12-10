@@ -2,6 +2,7 @@
 @layout EmptyLayout
 @inject HttpClient httpClient;
 @inject NavigationManager navManager;
+@inject AuthService authService;
 
 <PageTitle>Endava .NET Tech Course</PageTitle>
 
@@ -36,6 +37,33 @@
     public async Task RegisterNewUser()
     {
         await httpClient.PostAsJsonAsync("api/account/register", newUser);
+        await authService.Login(new LoginDTO
+        {
+            Password = newUser.Password,
+            Username = newUser.Username
+        });
+
+        CreateWalletDTO wallet = new()
+        {
+            Amount = 0,
+            CurrencyCode = "eur",
+            Type = "Basic"
+        };
+
+        await httpClient.PostAsJsonAsync("api/wallet", wallet);
+
+        var mainWallets = await httpClient.GetFromJsonAsync<List<GetWalletDTO>>("api/wallet/getwallets");
+        var resultWallet = mainWallets.FirstOrDefault(w => w.Id != Guid.Empty);
+        var dto = new UserDto
+        {
+            Email = newUser.Email,
+            FirstName = newUser.FirstName,
+            LastName = newUser.LastName,
+            Username = newUser.Username,
+            MainWalletId = resultWallet.WalletId
+        };
+
+        await httpClient.PostAsJsonAsync("api/account/update", dto);
 
         newUser = new();
         navManager.NavigateTo("");

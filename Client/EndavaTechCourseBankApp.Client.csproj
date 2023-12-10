@@ -9,6 +9,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
     
+ 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.13" />
@@ -23,35 +24,16 @@
 
   <ItemGroup>
     <None Include="Pages\Admin\Admin.razor" />
-    <None Include="Pages\CreateTransaction.razor" />
+    <None Include="Pages\Admin\WalletTypes.razor" />
+    <None Include="Pages\User\AddToFavorites.razor" />
+    <None Include="Pages\User\CreateTransaction.razor" />
     <None Include="Pages\Login.razor" />
     <None Include="Pages\Register.razor" />
     <None Include="Pages\RowTemplate.razor" />
-    <None Include="Pages\Transactions.razor" />
-    <None Include="Pages\Wallets.razor" />
-    <None Include="Shared\EmptyLayout.razor" />
+    <None Include="Pages\User\Transactions.razor" />
+    <None Include="Pages\User\User.razor" />
+    <None Include="Pages\User\Wallets.razor" />
+    <None Include="Shared\UserLayout.razor" />
+    <None Include="Shared\UserNavMenu.razor" />
   </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\RowTemplate.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Admin\Admin.razor" />
-    <_ContentIncludedByDefault Remove="Pages\CreateTransaction.razor" />
-    <_ContentIncludedByDefault Remove="Pages\RowTemplate.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Admin\Admin.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\CreateTransaction.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Watch Remove="Pages\CreateTransaction.razor" />
-  </ItemGroup>
-
 </Project>

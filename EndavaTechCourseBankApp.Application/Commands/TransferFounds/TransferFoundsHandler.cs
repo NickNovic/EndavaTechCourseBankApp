@@ -34,26 +34,37 @@ namespace EndavaTechCourseBankApp.Application.Commands.TransferFounds
 
             Currency senderCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == sender.CurrencyId);
             Currency accepterCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == accepter.CurrencyId);
-            
+
+            var walletType = this.context.commisions.FirstOrDefault(c => c.Type == sender.Type);
+            float commision = 0;
+            if (walletType is not null)
+                commision = walletType.Percent;
+            else
+                return CommandStatus.Failed("no shuch walletType");
 
             var transferCurrency = await context.currencies.FirstOrDefaultAsync(c => c.Id == request.CurrencyId);
 
             if (senderCurrency == transferCurrency)
             {
-                sender.Amount -= request.Amount;
+                sender.Amount -= (decimal)((float)request.Amount * (1 + commision));
             }
             else
             {
-                sender.Amount = sender.Amount - (request.Amount * transferCurrency.ChangeRate);
+                sender.Amount -= (decimal)((float)request.Amount * (1 + commision) * (float)transferCurrency.ChangeRate);
+            }
+
+            if(sender.Amount < 0)
+            {
+                return CommandStatus.Failed("Not enought money");
             }
 
             if(accepterCurrency == transferCurrency) 
             {
-                accepter.Amount -= request.Amount;
+                accepter.Amount += request.Amount;
             }
             else
             {
-                accepter.Amount = accepter.Amount - (request.Amount * transferCurrency.ChangeRate);
+                accepter.Amount = accepter.Amount + (request.Amount * transferCurrency.ChangeRate);
             }
                         
             context.wallets.Update(sender);
